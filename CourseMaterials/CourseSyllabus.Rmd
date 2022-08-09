@@ -1,7 +1,7 @@
 ---
-title: "BIOL7263 - Data Wrangling and Visualization for Biology"
+title: "BIOL7263 - Fall 2022 - Data Wrangling and Visualization for Biology"
 author: "Course Syllabus"
-date: "Fall 2022"
+date: "8/9/2022"
 output:
   html_document: 
     highlight: tango

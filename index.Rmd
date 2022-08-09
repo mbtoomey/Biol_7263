@@ -1,7 +1,7 @@
 ---
-title: "BIOL7263 - Data Wrangling and Visualization for Biology"
+title: "BIOL7263 - Fall 2022 - Data Wrangling and Visualization for Biology"
 author: "Matthew Toomey"
-date: "Fall 2022"
+date: "8/9/2022"
 output:
   prettydoc::html_pretty:
     theme: Cayman
