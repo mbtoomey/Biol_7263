@@ -12,7 +12,7 @@ This site contains course materials for BIOL7263 Data Wrangling and Visualizatio
 
 ## Course Materials
 
-[Software Installation](CourseMaterials/SoftwareInstallation.html)
+[Software Installation](CourseMaterials/InstallationInstructions.html)
 
 [Course Syllabus](CourseMaterials/CourseSyllabus.html)   
 
