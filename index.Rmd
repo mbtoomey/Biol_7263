@@ -1,0 +1,52 @@
+---
+title: "BIOL7263 - Data Wrangling and Visualization for Biology"
+author: "Matthew Toomey"
+date: "Fall 2022"
+output:
+  prettydoc::html_pretty:
+    theme: Cayman
+    highlight: github
+---
+
+This site contains course materials for BIOL7263 Data Wrangling and Visualization for Biology, Fall 2022.
+
+## Course Materials
+
+[Software Installation](CourseMaterials/SoftwareInstallation.html)
+
+[Course Syllabus](CourseMaterials/CourseSyllabus.html)   
+
+___
+
+## Lecture Outlines & Homework Assignments
+
+Date (week of)  | Lecture | Homework
+------------- |----------- | -------------
+August 22  | [Class organization and scheduling]() | -  
+August 29  | [Intro to R, RStudio, Git]() | TBD  
+September 5  | [Rmarkdown and simple visualization]() | TBD  
+September 12  | [dplyr and wrangling]() | TBD  
+September 19  | [dplyr and wrangling, Intro to Regular Expressions]() | TBD  
+September 26  | [ggplot2]() | TBD  
+October 3  | [ggplot2, Inkscape, Gimp]() | TBD  
+October 10  | [TBD]() | TBD  
+October 17  | [GIS in R]() | TBD  
+October 24  | [Student lessons]() | -
+October 31  | [Student lessons]() | -  
+November 7  | [Student lessons]() | -  
+November 14  | [Student lessons]() | -  
+November 21  | Thanksgiving break | -  
+November 28  | [Student lessons]() | -  
+December 5  | Last day of classes | -  
+
+___
+
+### Important Dates
+- 26 August: Last day to add classes through self-service
+- 30 August: Last day to add/drop through advising
+- 5 September: Labor day
+- 11 November: Last day to withdraw
+- 21-25 November: Thanksgiving Break
+- 5 December: Last day of classes
+
+
