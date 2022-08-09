@@ -3,11 +3,9 @@ title: "BIOL7263 - Fall 2022 - Data Wrangling and Visualization for Biology"
 author: "Course Syllabus"
 date: "8/9/2022"
 output:
-  html_document: 
-    highlight: tango
-    theme: united
-    keep_md: yes
-  pdf_document: default
+  prettydoc::html_pretty:
+    theme: Cayman
+    highlight: github
 ---
 
 ___
@@ -31,7 +29,7 @@ The aim of of this course is to introduce students to a variety of tools, mostly
 ## Pre-Requisites
 * A personal laptop computer that you bring to all lecture and lab meetings
     - Mac or Windows, with battery power to last 2.5 hours
-    - all [required software packages](CourseMaterials/SoftwareInstallation.html) installed and working
+    - all [required software packages](CourseMaterials/InstallationInstructions.html) installed and working
     - wireless access and an active TU mail account
 * Graduate standing as a PhD or MS student at TU
 * Undergraduates by invitation only after consultation with the instructor
