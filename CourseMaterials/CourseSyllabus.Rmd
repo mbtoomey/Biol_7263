@@ -77,6 +77,12 @@ The grading scale will be as follows:  89.50-100% - A, 79.50-89.49% - B, 69.50-7
 
 Please refer to the [course website](index.html) for an up-to-date schedule
 
+## Masking 
+
+The class masking policy will follow the CDC recommendations published here: https://www.cdc.gov/coronavirus/2019-ncov/your-health/covid-by-county.html 
+
+If the CDC recommends indoor masking we will follow this recommendation and you will be expected to wear a mask in class. If you have a medical condition that prevents you from wearing mask, please reach out to Student Access to seek a medical waiver.  Students who refuse to wear masks will be referred to the Dean of Students.
+
 ## Academic misconduct
 
 All instances of academic misconduct will follow the [Policies and Procedures Relating to Academic Misconduct of Undergraduates for the College of Engineering and Natural Sciences for graduate students](https://univoftulsa.sharepoint.com/sites/AcademicAffairs/academicpolicies/Shared%20Documents/Forms/AllItems.aspx?id=/sites/AcademicAffairs/academicpolicies/Shared%20Documents/Graduate%20School%20Academic%20Misconduct%20Policy-%20August%202017.pdf&parent=/sites/AcademicAffairs/academicpolicies/Shared%20Documents)
