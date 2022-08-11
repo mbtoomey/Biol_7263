@@ -64,7 +64,7 @@ In this lesson we will setup and use `git` to track changes and recover earlier 
 - open the "Settings and go to "Pages"
 - scroll to "Source" and change from "None" to "master branch"
 - Refresh page and you should see a message informing you of the web address for your page. 
-- For example mine is https://mbtoomey.github.io/RepoName/
+- For example mine is https://mbtoomey.github.io/Biol_7263/
 
 ## Git workflow
 
