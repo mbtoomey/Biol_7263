@@ -12,6 +12,10 @@ This site contains course materials for BIOL7263 Data Wrangling and Visualizatio
 
 ## Course Materials
 
+[Scheduling Survey](https://forms.gle/CUaDDMa7enTy3YL59)
+
+[Presentation sign-up sheet](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing)
+
 [Software Installation](CourseMaterials/InstallationInstructions.html)
 
 [Course Syllabus](CourseMaterials/CourseSyllabus.html)   
@@ -23,20 +27,20 @@ ___
 Date (week of)  | Lecture | Homework
 ------------- |----------- | -------------
 August 22  | [Class organization and scheduling]() | -  
-August 29  | [Intro to R, RStudio, Git]() | TBD  
-September 5  | [Rmarkdown and simple visualization]() | TBD  
-September 12  | [dplyr and wrangling]() | TBD  
-September 19  | [dplyr and wrangling, Intro to Regular Expressions]() | TBD  
-September 26  | [ggplot2]() | TBD  
-October 3  | [ggplot2, Inkscape, Gimp]() | TBD  
-October 10  | [TBD]() | TBD  
-October 17  | [GIS in R]() | TBD  
-October 24  | [Student lessons]() | -
-October 31  | [Student lessons]() | -  
-November 7  | [Student lessons]() | -  
-November 14  | [Student lessons]() | -  
+August 29  | Intro to R, RStudio, [Git](Lectures/Lesson2.html) | TBD  
+September 5  | Rmarkdown and simple visualization | TBD  
+September 12  | dplyr and wrangling | TBD  
+September 19  | dplyr and wrangling, Intro to Regular Expressions | TBD  
+September 26  | ggplot2 | TBD  
+October 3  | ggplot2, Inkscape, Gimp | TBD  
+October 10  | TBD | TBD  
+October 17  | GIS in R | TBD  
+October 24  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -
+October 31  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
+November 7  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
+November 14  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
 November 21  | Thanksgiving break | -  
-November 28  | [Student lessons]() | -  
+November 28  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
 December 5  | Last day of classes | -  
 
 ___
