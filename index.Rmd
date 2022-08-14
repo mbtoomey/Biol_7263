@@ -28,7 +28,7 @@ Date (week of)  | Lecture | Homework
 ------------- |----------- | -------------
 August 22  | [Class organization and scheduling]() | -  
 August 29  | Intro to R, RStudio, [Git](Lectures/Lesson2.html) | TBD  
-September 5  | Rmarkdown and simple visualization | TBD  
+September 5  | [Rmarkdown](Lectures/Lesson3.html) | TBD  
 September 12  | dplyr and wrangling | TBD  
 September 19  | dplyr and wrangling, Intro to Regular Expressions | TBD  
 September 26  | ggplot2 | TBD  

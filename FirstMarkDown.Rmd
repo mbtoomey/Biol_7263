@@ -1,0 +1,98 @@
+---
+title: "MyFirstRMarkDown"
+author: "M. Toomey"
+date: "8/14/2022"
+output:
+  html_document: 
+    number_sections: yes
+---
+
+Add text here. Use it like a typewritter. Add as much as you like.  
+Next text appears here is a separate paragraph. 
+
+Use two or more blank spaces at the end of a single spaced line for a carriage return. 
+
+# Big idea
+## More ideas
+### Specifics 
+#### Painful details
+
+# Basic text formating
+
+Are we having *fun* yet?  
+
+If not you **will** soon!
+
+subscript~text~
+
+superscript^text^
+
+strikethrough ~~test~~
+
+# Lists
+
+## unordered list
+
+* Finches
+* Sparrows
+    + House sparrow
+    + Tree sparrow
+
+## Order lists  
+    
+1. Finches
+2. Sparrows
+    + House sparrow
+    + Tree sparrow
+
+
+# Fencing
+
+Anything surrounded by backticks `will render as plain text` 
+
+R code inside ticks can be executed during rendering. For example, you can caluclate a value `r 3 + pi`. 
+
+You can create a whole block of plain text with three backticks
+
+```
+everything is plain text here.
+even single lines
+
+Useful for show blocks of codes
+```
+
+# Block quotes with `>`
+
+> Whether I shall turn out to be the hero of my own life, or whether that station will be held by anybody else, these pages must show.
+
+# Spacer line with three or more underscores
+
+___   
+
+Adds line between text
+
+# Adding links to you text
+
+[Dr. Toomey's website](mbtoomey.net)
+
+You can also put links in directly
+
+http://mbtoomey.net
+
+
+# Adding images 
+
+If the files are in the same folder as the markdown code they can be called directly
+
+![Penguin](penguin.jpg) 
+
+# Tables
+
+| Species  | Awesomeness
+| :------------- | :-------------
+| House Sparrow   | Medium|
+| Tree Sparrow  | High|
+
+
+
+
