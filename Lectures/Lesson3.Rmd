@@ -3,8 +3,7 @@ title: "Working with Rmarkdown"
 author: "Matthew Toomey"
 date: "8/14/2022"
 output:
-  pdf_document: default
-  html_document: default
+    html_document: default
 ---
 
 ___
@@ -37,12 +36,9 @@ A more detailed reference is available at the [rmarkdown cookbook](https://bookd
     * strikethrough `~~<text>~~`
     * quotations `><text with no closing mark`
     
-### Spacing, manual breaks, lines
-- line spacing effects
-- two extra spaces at the end of a line for a manual break
-- lists
-    * indented
-    * numbered
+### Spacing
+- Regular text is single spaced
+- double spacing sets a line break (or carriage return)
     
 ### Insert links and images   
 - links 
@@ -54,16 +50,14 @@ A more detailed reference is available at the [rmarkdown cookbook](https://bookd
 
 - images 
 ```
-![Peanguin](Penguin.jpg)
+![Penguin](Penguin.jpg)
 ```
-![Peanguin](Penguin.jpg)
+![Penguin](Penguin.jpg)
 
 
 ### Lists 
 
-# Lists
-
-## unordered list
+#### unordered list
 ```
 - Finches
 - Sparrows
@@ -78,7 +72,7 @@ For second level list items "-" is preceeded by two spaces
     - Tree sparrow
 
 
-## Order lists  
+#### Order lists  
 ```    
 1. Finches
 2. Sparrows
@@ -221,4 +215,89 @@ $$P(\mbox{Expression of gene}) = Z$$
 
 ```
 $$P(\mbox{Expression of gene}) = Z$$
+
 ```
+
+## R code blocks 
+
+- initiate with keyboard command `ctrl+alt+i`
+
+
+```{r}
+Lnk <-"https://github.com/mbtoomey/Biol_7263/blob/main/Data/yeast.Rdata?raw=true"
+download.file(Lnk, "yeast.Rdata", mode = "wb")
+load("yeast.Rdata")
+```
+
+
+This will load a dataframe called **yeast** that is taken from figure 2 of:
+
+Shen, X., S. Song, C. Li, and J. Zhang (2022). Synonymous mutations in representative yeast genes are mostly strongly non-neutral. Nature:1–7.
+
+We can peek at the data with `head(yeast)`. 
+
+```{r}
+head(yeast)
+```
+
+## Explore the data
+
+We can begin to work with the dataset. Lets calculated a mean of fitness 
+
+```{r}
+mean(yeast$Fitness)
+```
+
+This fails because the data type of Fitness was classified as character. Let's fix this. 
+
+```{r}
+yeast$Fitness<-as.numeric(yeast$Fitness)
+```
+
+Let's try agian
+
+```{r}
+mean(yeast$Fitness)
+```
+
+There are missing vaues in the dataset (NAs) that R doesn't know what to do with. Let's get rid of those for now. (Note this might not always be a wise approach!!)
+
+```{r}
+yeast<-na.omit(yeast)
+```
+
+Third time is a charm?
+
+```{r}
+mean(yeast$Fitness)
+```
+Notice that the results are given immediately after the code block. 
+
+As noted abov, Rmarkdown you can also integrate results into you text. For example, we can add the mean of fitness directly to the text by putting in the inline command "r mean(fitness)" surrounded by ` 
+
+The mean fitness across all mutant genotypes was **`r mean(yeast$Fitness)`**. 
+
+What is cool about this is that this dynamic and is recaculated everytime you "Knit" the markdown. If there are changes to the dataset, they will be incorporated here. 
+
+Rmarkdown also allows you include data plots
+
+```{r}
+boxplot(yeast$Fitness ~ yeast$Mutation_type)
+```
+
+What if we want to show the plot, but do not want the reader to see the code? 
+We can add `echo = FALSE` option to the r call
+
+```{r echo = FALSE}
+boxplot(yeast$Fitness ~ yeast$Mutation_type)
+```
+
+What if we want to show the code, but do not want run it? 
+We can add `eva, = FALSE` option to the r call
+
+```{r eval = FALSE}
+boxplot(yeast$Fitness ~ yeast$Mutation_type)
+```
+
+
+
