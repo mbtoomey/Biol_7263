@@ -26,7 +26,7 @@ ___
 
 Date (week of)  | Lecture | Homework
 ------------- |----------- | -------------
-August 22  | [Class organization and scheduling]() | -  
+August 22  | [Class organization and scheduling](https://forms.gle/CUaDDMa7enTy3YL59) | -  
 August 29  | Intro to R, RStudio, [Git](Lectures/Lesson2.html) | TBD  
 September 5  | [Rmarkdown](Lectures/Lesson3.html) | TBD  
 September 12  | dplyr and wrangling | TBD  
