@@ -1,0 +1,142 @@
+---
+title: "Regular Expressions"
+author: "Matthew Toomey"
+date: "8/16/2022"
+output: html_document
+---
+
+Regular expression are a powerful tool to search text files and extract and edit elements in those files. They can make quick work of formatting problems and highly repetitive tasks. If you find yourself repetitively clicking, cutting, pasting, deleting, etc. to clean up a problematic file, you might be able to solve your problem quickly with a regular expression. 
+
+First we will work with regular expressions in our text editor. I will be using [Notepad++](https://notepad-plus-plus.org/downloads/)
+
+### Wildcards
+- `\w` a single word character [letter,number or `_`]
+- `\d` a single number character [0-9]
+- `\t` a single tab space
+- `\s` a single space, tab, or line break
+- `\n` a single line break (or try `\r`)
+
+
+WIth wildcards we can quickly swap spaces for line breaks, which can be useful when tidying list. 
+
+```
+INPUT: larry curly moe
+SEARCH: \s
+REPLACE: \n
+RESULT: 
+larry 
+curly
+moe
+```
+
+### Quantifiers
+- add these on to any of the wildcards
+
+- `\w+` one or more consecutive word characters
+- `\w*` zero or more consecutive word characters
+- `\w{3}` exactly 3 consecutive word characters
+- `\w{3,}` 3 or more consecutive word characters
+- `\w{3,5}` 3, 4, or 5 consecutive word characters
+
+### Repair text cut and pasted from a pdf
+```
+INPUT: Phenotypic plasticity, the ability of a single genotype 
+to  express  different  phenotypes  depending  on  envi-
+ronmental conditions, is a key determinant of organ-
+ismal performance and greatly influences ecological 
+interactions. Its role in evolution is also increasingly 
+acknowledged  (Bradshaw,  1965;  Schlichting  &  Pig-
+liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-
+Eberhard, 2003; DeWitt & Scheiner, 2004; Van Snick 
+Gray & Stauffer, 2004; Fusco & Minelli, 2010; Pfen-
+nig  et  al.,  2010).
+
+SEARCH: \n #find the line breaks. In my system I had to remove with both \n and \r
+
+REPLACE: (nothing)
+
+RESULT: Phenotypic plasticity, the ability of a single genotype   to  express  different  phenotypes  depending  on  envi-  ronmental conditions, is a key determinant of organ-  ismal performance and greatly influences ecological   interactions. Its role in evolution is also increasingly   acknowledged  (Bradshaw,  1965;  Schlichting  &  Pig-  liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-  Eberhard, 2003; DeWitt & Scheiner, 2004; Van Snick   Gray & Stauffer, 2004; Fusco & Minelli, 2010; Pfen-  nig  et  al.,  2010).
+```
+
+This still needs work. The word spcaing is variable and there are "-" in the text. 
+
+```
+INPUT: from above
+
+SEARCH: -\s+ #this will find the "-" and the spaces that follow
+
+REPLACE: (nothing) # this will delete 
+
+RESULT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt & Scheiner, 2004; Van Snick  Gray & Stauffer, 2004; Fusco & Minelli, 2010; Pfennig  et  al.,  2010).
+```
+Now we just need to fix the line spacing
+```
+INPUT: from above
+
+SEARCH: \s+
+
+REPLACE: " " #input a single space
+
+RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged (Bradshaw, 1965; Schlichting & Pigliucci, 1998; Agrawal, 2001; Pigliucci, 2001; WestEberhard, 2003; DeWitt & Scheiner, 2004; Van Snick Gray & Stauffer, 2004; Fusco & Minelli, 2010; Pfennig et al., 2010).
+```
+#### The zero or more `*` quantifier
+
+```
+INPUT: vanilla , chocolate, strawberry ,   rocky road,   mint chocolate chip
+
+SEARCH: \s*,\s*
+
+REPLACE: ,  #note the replacement is "," and a space " "
+
+RESULT: vanilla, chocolate, strawberry, rocky road, mint chocolate chip
+```
+
+#### `.*` for "all the rest"
+
+```
+INPUT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt & Scheiner, 2004; Van Snick  Gray & Stauffer, 2004; Fusco & Minelli, 2010; Pfennig  et  al.,  2010).
+
+SEARCH: \s+\(.*\) #note that "(" and ")" are regex operators so we need to escape and use the literal character by adding the "\" in front of them
+
+Replace: (nothing)
+
+RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged.
+```
+#### Capturing and repalcing text elements
+
+Working with genus and species names
+
+```
+INPUT: 
+Haemorhous cassinii	
+Haemorhous purpureus 
+Haemorhous mexicanus
+SEARCH: (\w)\w+ (\w+) #capture first letter, skip rest of word and space, capture all of next word
+REPLACE: \1_\2 # paste capture element 1 add an "_" and paste capture element 2. 
+RESULT:
+H_cassinii	
+H_purpureus 
+H_mexicanus
+```
+___
+
+Regular expressions can also be implemented in the UNIX shell. This is can be particularly useful when handling very large files like those generated in genomics analayses. 
+
+Navigating the UNIX shell - BUILD THIS LESSON
+
+In the shell there are several different basic tools that use regular expressions including:  
+- `grep` for searching text  
+- `sed` to transform text - find and replace functions  
+- `awk` functions similar to grep and sed, but a different approach to implementation  
+
+Note that the way that regular expressions are coded in each of these is different than the preceding examples. 
+
+### Using grep to pull headers from a FASTA
+
+Open the shell in the terminal of Rstudio. If you are using a windows machine, be sure to set the options foe the terminal to `Git Bash`
+
+
+#### Using grep to find a gene by name
+
+
+

@@ -1,0 +1,76 @@
+---
+title: "Dplyr"
+author: "M. Toomey"
+date: "8/17/2022"
+output: html_document
+---
+
+### The core 'verbs'
+1. `filter()`   
+2. `arrange()`   
+3. `select()`   
+4. `summarize()` and `group_by()`     
+5. `mutate()`
+
+### What is a tibble?    
++ "a modern take on data frames"   
++ said to keep the great aspects of data frames and drops the frustrating ones (i.e. changing variable names, changing an input type)
+
+### `filter()`: Pick/subset observations by their values 
+```{r}
+### uses >, >=, <, <=,!=, == (not just one!) for comparisons   
+### Logical operators: & | !
+
+# filter automatically excludes NAs, have to ask for them specifically 
+
+#Add example
+```
+
+### `arrange()` reoders rows
+- by value of a variable 
+- additional variables break ties 
+- default ascending, `desc()` 
+- helper gives descending
+
+### `select()` variables (columns) 
+- by their names 
+- can specify range of column names left to right with `:`
+- to exclude `-(variable name)`
+- can use to rearrange columns by listing in desired order
+- `everything()` gives everything not specified in the command
+
+### Helper functions 
+- `contains`
+- `ends_with`
+- `starts_with`
+- `matches`
+- regular expressions
+- `num_range`
+
+### `mutate()` 
+- creates new variable with functions of existing variables
+- uses arithmatic operators 
+- can also uses paste
+- `transmute()` - creates separate tibble with new variable
+
+### `summarize()` and `group_by()` 
+- `summarize ()`
+  - mean() 
+  - median()
+  - n() - count of observations
+  - SD() - standard deviation
+  - SEE EVERNOTE FOR ADDITIONAL
+  
+### Piping 
+- a sequence of actions 
+- passes intermediate results on to next functions
+
+formating:
+- space before the pipe
+- follow with a new line
+
+
+  
+
+
+  
