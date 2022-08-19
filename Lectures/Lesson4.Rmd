@@ -120,9 +120,11 @@ H_mexicanus
 ```
 ___
 
-Regular expressions can also be implemented in the UNIX shell. This is can be particularly useful when handling very large files like those generated in genomics analayses. 
+## Regular expression and very large file in the shell
 
-Navigating the UNIX shell - BUILD THIS LESSON
+Regular expressions can also be implemented in the UNIX shell. This is can be particularly useful when handling very large files like those generated in genomics analyses. 
+
+Navigating the UNIX shell - BUILD SHORT LESSON FOR THIS
 
 In the shell there are several different basic tools that use regular expressions including:  
 - `grep` for searching text  
@@ -133,10 +135,74 @@ Note that the way that regular expressions are coded in each of these is differe
 
 ### Using grep to pull headers from a FASTA
 
-Open the shell in the terminal of Rstudio. If you are using a windows machine, be sure to set the options foe the terminal to `Git Bash`
+For this example I downloaded the complete transcript sequences of the Mallard Duck [*Anas platyrhynchus*](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/476/345/GCF_015476345.1_ZJU1.0/GCF_015476345.1_ZJU1.0_rna.fna.gz). 
+
+Open the shell in the terminal of Rstudio. If you are using a windows machine, be sure to set the options foe the terminal to `Git Bash`. Navigate to the folder containing the FASTA.
+
+Now we will copy every line starting this ">" to a new file called Duck_headers.txt
+
+```
+#The file is compressed, so first we will unzip it: 
+
+gunzip GCF_015476345.1_ZJU1.0_rna.fna.gz
+
+#Then we can use grep to pull all of the headers
+
+grep '^>' GCF_015476345.1_ZJU1.0_rna.fna > Duck_headers.txt
+
+head Duck_header.txt
+
+RESULT: 
+
+>NM_001285955.2 Anas platyrhynchos acireductone dioxygenase 1 (ADI1), mRNA
+>NM_001285957.1 Anas platyrhynchos ribosomal protein S7 (RPS7), mRNA
+>NM_001289841.1 Anas platyrhynchos ornithine decarboxylase antizyme 1 (OAZ1), mRNA
+>NM_001291578.1 Anas platyrhynchos antizyme inhibitor 1 (AZIN1), mRNA
+>NM_001310341.1 Anas platyrhynchos TNF superfamily member 13b (TNFSF13B), mRNA
+>NM_001310342.1 Anas platyrhynchos RAB11A, member RAS oncogene family (RAB11A), mRNA
+>NM_001310343.1 Anas platyrhynchos fatty acid binding protein 2 (FABP2), mRNA
+>NM_001310344.1 Anas platyrhynchos free fatty acid receptor 3 (LOC101802760), mRNA
+>NM_001310345.1 Anas platyrhynchos growth hormone 1 (GH1), mRNA
+>NM_001310346.1 Anas platyrhynchos ras homolog family member A (RHOA), mRNA
+```
+
+### Uisng `sed` to clean up the headers 
+
+#Here we can capture specific elements of the pattern with `\(` and `\)`
+
+```
+sed 's/\(\>\w*\..\).*.(\(...*\)).*/\1 \2/' Duck_headers.txt > num_symbol.txt
+
+head num_symbol.txt
+
+>NM_001285955.2 ADI1
+>NM_001285957.1 RPS7
+>NM_001289841.1 OAZ1
+>NM_001291578.1 AZIN1
+>NM_001310341.1 TNFSF13B
+>NM_001310342.1 RAB11A
+>NM_001310343.1 FABP2
+>NM_001310344.1 LOC101802760
+>NM_001310345.1 GH1
+>NM_001310346.1 RHOA\
+```
+
+### Using `sed` to find a gene by name
+
+What if we want the full sequence of a specific gene in this file. We can use `sed` to capture a range of lines from the FASTA
+
+```
+#Here I modified the FASTA to add a space between transcripts. Then I selected the line between the first line containing "BCO2" and nest line beginning with a space. I used a pipe "|" to pass the output from the first to the second command. 
+
+sed 's/>/ \n>/g' GCF_015476345.1_ZJU1.0_rna.fna | sed -n '/BCO2/,/^\s/p' > BCO2.txt
+
+head BCO2.txt
+```
 
 
-#### Using grep to find a gene by name
+
+
+
 
 
 
