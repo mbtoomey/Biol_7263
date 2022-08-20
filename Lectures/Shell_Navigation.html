@@ -12,7 +12,7 @@
 <meta name="author" content="Matthew Toomey" />
 
 
-<title>Regular Expressions</title>
+<title>Shell basics</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,202 +362,146 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Regular Expressions</h1>
+<h1 class="title toc-ignore">Shell basics</h1>
 <h4 class="author">Matthew Toomey</h4>
-<h4 class="date">8/16/2022</h4>
+<h4 class="date">8-20-22</h4>
 
 </div>
 
 
-<p>Regular expression are a powerful tool to search text files and
-extract and edit elements in those files. They can make quick work of
-formatting problems and highly repetitive tasks. If you find yourself
-repetitively clicking, cutting, pasting, deleting, etc. to clean up a
-problematic file, you might be able to solve your problem quickly with a
-regular expression.</p>
-<p>First we will work with regular expressions in our text editor. I
-will be using <a href="https://notepad-plus-plus.org/downloads/">Notepad++</a></p>
-<div id="wildcards" class="section level3">
-<h3>Wildcards</h3>
-<ul>
-<li><code>\w</code> a single word character [letter,number or
-<code>_</code>]</li>
-<li><code>\d</code> a single number character [0-9]</li>
-<li><code>\t</code> a single tab space</li>
-<li><code>\s</code> a single space, tab, or line break</li>
-<li><code>\n</code> a single line break (or try <code>\r</code>)</li>
-</ul>
-<p>WIth wildcards we can quickly swap spaces for line breaks, which can
-be useful when tidying list.</p>
-<pre><code>INPUT: larry curly moe
-SEARCH: \s
-REPLACE: \n
-RESULT: 
-larry 
-curly
-moe</code></pre>
+<p>The shell is a very old (~50 years) command line interface for UNIX
+systems that you will likely encounter if you interact with high
+performance computing clusters or are implementing bespoke
+bioinformatics software packages. This interface is very different from
+modern GUI interfaces and can be disorienting if you are unfamiliar will
+the underlie organization of the system. Despite its rudimentary
+appearance, the shell is a powerful and efficient way to interact with
+large data files.</p>
+<div id="system-problems" class="section level3">
+<h3>System problems</h3>
+<p>The shell is part of the UNIX-based operating systems. Therefore you
+can easily access the shell from the terminal of iOS and linux
+devices.</p>
+<p>Windows uses a different underlying architecture and therefore the
+shell must be emulated. There are a variety of ways to do this. For our
+purposes, it will be sufficient to access the shell emulation that is
+installed with Git. Note however that this is a relatively limited
+implementation and you may want to consider something like <a href="https://en.wikipedia.org/wiki/Cygwin">Cygwin</a> for a more fully
+featured emulation.</p>
 </div>
-<div id="quantifiers" class="section level3">
-<h3>Quantifiers</h3>
+<div id="the-organization-of-the-computer" class="section level3">
+<h3>The organization of the computer</h3>
 <ul>
-<li><p>add these on to any of the wildcards</p></li>
-<li><p><code>\w+</code> one or more consecutive word characters</p></li>
-<li><p><code>\w*</code> zero or more consecutive word
-characters</p></li>
-<li><p><code>\w{3}</code> exactly 3 consecutive word characters</p></li>
-<li><p><code>\w{3,}</code> 3 or more consecutive word
-characters</p></li>
-<li><p><code>\w{3,5}</code> 3, 4, or 5 consecutive word
-characters</p></li>
+<li>With shell you are “inside” the file system, rather than viewing
+from above</li>
+<li>Hierarchical tree from root to branch tips with forks</li>
+<li>You need to understand where you are and direct actions/programs to
+correct directories and file locations</li>
 </ul>
 </div>
-<div id="repair-text-cut-and-pasted-from-a-pdf" class="section level3">
-<h3>Repair text cut and pasted from a pdf</h3>
-<pre><code>INPUT: Phenotypic plasticity, the ability of a single genotype 
-to  express  different  phenotypes  depending  on  envi-
-ronmental conditions, is a key determinant of organ-
-ismal performance and greatly influences ecological 
-interactions. Its role in evolution is also increasingly 
-acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pig-
-liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-
-Eberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick 
-Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfen-
-nig  et  al.,  2010).
-
-SEARCH: \n #find the line breaks. In my system I had to remove with both \n and \r
-
-REPLACE: (nothing)
-
-RESULT: Phenotypic plasticity, the ability of a single genotype   to  express  different  phenotypes  depending  on  envi-  ronmental conditions, is a key determinant of organ-  ismal performance and greatly influences ecological   interactions. Its role in evolution is also increasingly   acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pig-  liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-  Eberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick   Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfen-  nig  et  al.,  2010).</code></pre>
-<p>This still needs work. The word spcaing is variable and there are “-”
-in the text.</p>
-<pre><code>INPUT: from above
-
-SEARCH: -\s+ #this will find the &quot;-&quot; and the spaces that follow
-
-REPLACE: (nothing) # this will delete 
-
-RESULT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick  Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig  et  al.,  2010).</code></pre>
-<p>Now we just need to fix the line spacing</p>
-<pre><code>INPUT: from above
-
-SEARCH: \s+
-
-REPLACE: &quot; &quot; #input a single space
-
-RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged (Bradshaw, 1965; Schlichting &amp; Pigliucci, 1998; Agrawal, 2001; Pigliucci, 2001; WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig et al., 2010).</code></pre>
-<div id="the-zero-or-more-quantifier" class="section level4">
-<h4>The zero or more <code>*</code> quantifier</h4>
-<pre><code>INPUT: vanilla , chocolate, strawberry ,   rocky road,   mint chocolate chip
-
-SEARCH: \s*,\s*
-
-REPLACE: ,  #note the replacement is &quot;,&quot; and a space &quot; &quot;
-
-RESULT: vanilla, chocolate, strawberry, rocky road, mint chocolate chip</code></pre>
+<div id="where-am-i" class="section level3">
+<h3>Where am I?</h3>
+<ul>
+<li><code>pwd</code> - print working directory</li>
+<li>this will return your current location</li>
+</ul>
 </div>
-<div id="for-all-the-rest" class="section level4">
-<h4><code>.*</code> for “all the rest”</h4>
-<pre><code>INPUT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick  Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig  et  al.,  2010).
-
-SEARCH: \s+\(.*\) #note that &quot;(&quot; and &quot;)&quot; are regex operators so we need to escape and use the literal character by adding the &quot;\&quot; in front of them
-
-Replace: (nothing)
-
-RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged.</code></pre>
+<div id="what-is-here" class="section level3">
+<h3>What is here?</h3>
+<ul>
+<li><code>ls</code> - prints a list of files and folders in the current
+directory</li>
+<li><code>ls &lt;path to folder&gt;</code> - will list files and folders
+in whatever you list in the “path to folder”.</li>
+</ul>
+<div id="useful-options-with-ls" class="section level4">
+<h4>Useful options with <code>ls</code></h4>
+<ul>
+<li><code>ls -a</code> shows all including hidden files</li>
+<li><code>ls -l</code> long format with lots of detail</li>
+<li><code>lf -R</code> recursively list subdirectories (careful!)</li>
+<li><code>ls -1</code> list one item per line (useful for
+programming)</li>
+<li><code>ls -G</code> list files and directories in color</li>
+<li><code>ls -F</code> use symbols for different file types
+<ul>
+<li>no symbol = file</li>
+<li><code>/</code> = a directory</li>
+<li><code>*</code> = an executable shell script</li>
+</ul></li>
+</ul>
 </div>
-<div id="capturing-and-repalcing-text-elements" class="section level4">
-<h4>Capturing and repalcing text elements</h4>
-<p>Working with genus and species names</p>
-<pre><code>INPUT: 
-Haemorhous cassinii 
-Haemorhous purpureus 
-Haemorhous mexicanus
-SEARCH: (\w)\w+ (\w+) #capture first letter, skip rest of word and space, capture all of next word
-REPLACE: \1_\2 # paste capture element 1 add an &quot;_&quot; and paste capture element 2. 
-RESULT:
-H_cassinii  
-H_purpureus 
-H_mexicanus</code></pre>
-<hr />
+<div id="exercise-open-shell-do-a-listing-with-ls--gf" class="section level4">
+<h4>EXERCISE: Open shell, do a listing with ls -GF</h4>
 </div>
 </div>
-<div id="regular-expression-and-very-large-file-in-the-shell" class="section level2">
-<h2>Regular expression and very large file in the shell</h2>
-<p>Regular expressions can also be implemented in the UNIX shell. This
-is can be particularly useful when handling very large files like those
-generated in genomics analyses.</p>
-<p>For some basic operation in the shell see - <a href="Lectures/Shell_Navigation.html">Navigating the UNIX shell</a></p>
-<p>In the shell there are several different basic tools that use regular
-expressions including:<br />
-- <code>grep</code> for searching text<br />
-- <code>sed</code> to transform text - find and replace functions<br />
-- <code>awk</code> functions similar to grep and sed, but a different
-approach to implementation</p>
-<p>Note that the way that regular expressions are coded in each of these
-is different than the preceding examples.</p>
-<div id="using-grep-to-pull-headers-from-a-fasta" class="section level3">
-<h3>Using grep to pull headers from a FASTA</h3>
-<p>For this example I downloaded the complete transcript sequences of
-the Mallard Duck <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/476/345/GCF_015476345.1_ZJU1.0/GCF_015476345.1_ZJU1.0_rna.fna.gz"><em>Anas
-platyrhynchus</em></a>.</p>
-<p>Open the shell in the terminal of Rstudio. If you are using a windows
-machine, be sure to set the options foe the terminal to
-<code>Git Bash</code>. Navigate to the folder containing the FASTA.</p>
-<p>Now we will copy every line starting this “&gt;” to a new file called
-Duck_headers.txt</p>
-<pre><code>#The file is compressed, so first we will unzip it: 
-
-gunzip GCF_015476345.1_ZJU1.0_rna.fna.gz
-
-#Then we can use grep to pull all of the headers
-
-grep &#39;^&gt;&#39; GCF_015476345.1_ZJU1.0_rna.fna &gt; Duck_headers.txt
-
-head Duck_header.txt
-
-RESULT: 
-
-&gt;NM_001285955.2 Anas platyrhynchos acireductone dioxygenase 1 (ADI1), mRNA
-&gt;NM_001285957.1 Anas platyrhynchos ribosomal protein S7 (RPS7), mRNA
-&gt;NM_001289841.1 Anas platyrhynchos ornithine decarboxylase antizyme 1 (OAZ1), mRNA
-&gt;NM_001291578.1 Anas platyrhynchos antizyme inhibitor 1 (AZIN1), mRNA
-&gt;NM_001310341.1 Anas platyrhynchos TNF superfamily member 13b (TNFSF13B), mRNA
-&gt;NM_001310342.1 Anas platyrhynchos RAB11A, member RAS oncogene family (RAB11A), mRNA
-&gt;NM_001310343.1 Anas platyrhynchos fatty acid binding protein 2 (FABP2), mRNA
-&gt;NM_001310344.1 Anas platyrhynchos free fatty acid receptor 3 (LOC101802760), mRNA
-&gt;NM_001310345.1 Anas platyrhynchos growth hormone 1 (GH1), mRNA
-&gt;NM_001310346.1 Anas platyrhynchos ras homolog family member A (RHOA), mRNA</code></pre>
+<div id="the-cd-command" class="section level3">
+<h3>The <code>cd</code> command</h3>
+<ul>
+<li>use this to change directories</li>
+<li>most basic form <code>cd &lt;directory name&gt;</code> only works
+for directories that are “below” your current directory
+(subdirectories)</li>
+</ul>
 </div>
-<div id="uisng-sed-to-clean-up-the-headers" class="section level3">
-<h3>Uisng <code>sed</code> to clean up the headers</h3>
-<p>#Here we can capture specific elements of the pattern with
-<code>\(</code> and <code>\)</code></p>
-<pre><code>sed &#39;s/\(\&gt;\w*\..\).*.(\(...*\)).*/\1 \2/&#39; Duck_headers.txt &gt; num_symbol.txt
-
-head num_symbol.txt
-
-&gt;NM_001285955.2 ADI1
-&gt;NM_001285957.1 RPS7
-&gt;NM_001289841.1 OAZ1
-&gt;NM_001291578.1 AZIN1
-&gt;NM_001310341.1 TNFSF13B
-&gt;NM_001310342.1 RAB11A
-&gt;NM_001310343.1 FABP2
-&gt;NM_001310344.1 LOC101802760
-&gt;NM_001310345.1 GH1
-&gt;NM_001310346.1 RHOA\</code></pre>
+<div id="short-cuts-with-cd" class="section level3">
+<h3>short-cuts with <code>cd</code></h3>
+<ul>
+<li>shell opens in your <code>home</code> directory</li>
+<li><code>cd ~</code> always returns you to home in one jump</li>
+<li><code>cd</code> also takes you home with one less symbol to
+type</li>
+<li><code>/</code> takes you to top level root of your computer (rarely
+needed)</li>
+<li><code>cd ..</code> moves you up to the next highest directory</li>
+<li><code>cd ../..</code> moves you up two directories</li>
+</ul>
 </div>
-<div id="using-sed-to-find-a-gene-by-name" class="section level3">
-<h3>Using <code>sed</code> to find a gene by name</h3>
-<p>What if we want the full sequence of a specific gene in this file. We
-can use <code>sed</code> to capture a range of lines from the FASTA</p>
-<pre><code>#Here I modified the FASTA to add a space between transcripts. Then I selected the line between the first line containing &quot;BCO2&quot; and nest line beginning with a space. I used a pipe &quot;|&quot; to pass the output from the first to the second command. 
-
-sed &#39;s/&gt;/ \n&gt;/g&#39; GCF_015476345.1_ZJU1.0_rna.fna | sed -n &#39;/BCO2/,/^\s/p&#39; &gt; BCO2.txt
-
-head BCO2.txt</code></pre>
+<div id="creating-files-and-directories" class="section level3">
+<h3>Creating files and directories</h3>
+<ul>
+<li><code>touch path/to/&lt;filename&gt;</code> creates a file in the
+specified directory</li>
+<li><code>mkdir</code> makes a directory within the current
+directory</li>
+</ul>
 </div>
+<div id="removing-a-file-or-a-directory" class="section level3">
+<h3>Removing a file or a directory</h3>
+<ul>
+<li>Be careful, these actions cannot be undon. There is no “trash”
+folder in the shell</li>
+<li><code>rm &lt;filename&gt;</code> removes a file</li>
+<li><code>rmdir &lt;directoryname&gt;</code> removes a directory
+(directory must be empty)</li>
+<li><code>rm -r &lt;directoryname&gt;</code> removes directory and
+recursively removes all of its subdirectories and files!</li>
+</ul>
+</div>
+<div id="copying-or-moving-files-folders-or-directories" class="section level3">
+<h3>Copying or moving files, folders, or directories</h3>
+<ul>
+<li><code>cp sourceFile destinationFile</code> copies file, folder or
+directory from source location to somewhere else</li>
+<li><code>mv sourceFile destinationFile</code> moves file, folder or
+directory from source location to somewhere else</li>
+</ul>
+</div>
+<div id="renaming-or-save-as-files-folders-or-directories" class="section level3">
+<h3>Renaming or save as… files, folders, or directories</h3>
+<ul>
+<li><code>mv oldName newName</code> in same location renames file</li>
+<li><code>cp oldName newName</code> in same location saves a copy of the
+file to a new name</li>
+</ul>
+</div>
+<div id="these-commands-will-recognize-wildcareds" class="section level3">
+<h3>These commands will recognize wildcareds</h3>
+<ul>
+<li><code>rm *.pdf</code> removes all .pdf files</li>
+<li><code>rm F*.pdf</code> removes all .pdf files that begin with the
+letter F</li>
+</ul>
 </div>
 
 

@@ -124,7 +124,7 @@ ___
 
 Regular expressions can also be implemented in the UNIX shell. This is can be particularly useful when handling very large files like those generated in genomics analyses. 
 
-Navigating the UNIX shell - BUILD SHORT LESSON FOR THIS
+For some basic operation in the shell see - [Navigating the UNIX shell](Lectures/Shell_Navigation.html)
 
 In the shell there are several different basic tools that use regular expressions including:  
 - `grep` for searching text  

@@ -15,19 +15,16 @@
 
 <title>BIOL7263 - Fall 2022 - Data Wrangling and Visualization for Biology</title>
 
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
 });
 </script>
@@ -59,7 +56,8 @@ code span.ot { color: #007020; }
 
 
 <section class="page-header">
-<h1 class="title toc-ignore project-name">BIOL7263 - Fall 2022 - Data Wrangling and Visualization for Biology</h1>
+<h1 class="title toc-ignore project-name">BIOL7263 - Fall 2022 - Data
+Wrangling and Visualization for Biology</h1>
 <h4 class="author project-author">Matthew Toomey</h4>
 <h4 class="date project-date">8/9/2022</h4>
 </section>
@@ -67,18 +65,27 @@ code span.ot { color: #007020; }
 
 
 <section class="main-content">
-<p>This site contains course materials for BIOL7263 Data Wrangling and Visualization for Biology, Fall 2022.</p>
+<p>This site contains course materials for BIOL7263 Data Wrangling and
+Visualization for Biology, Fall 2022.</p>
 <div id="course-materials" class="section level2">
 <h2>Course Materials</h2>
-<p><a href="https://forms.gle/CUaDDMa7enTy3YL59">Scheduling Survey</a></p>
-<p><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Presentation sign-up sheet</a></p>
-<p><a href="CourseMaterials/InstallationInstructions.html">Software Installation</a></p>
+<p><a href="https://forms.gle/CUaDDMa7enTy3YL59">Scheduling
+Survey</a></p>
+<p><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Presentation
+sign-up sheet</a></p>
+<p><a href="CourseMaterials/InstallationInstructions.html">Software
+Installation</a></p>
 <p><a href="CourseMaterials/CourseSyllabus.html">Course Syllabus</a></p>
 <hr />
 </div>
 <div id="lecture-outlines-homework-assignments" class="section level2">
 <h2>Lecture Outlines &amp; Homework Assignments</h2>
 <table>
+<colgroup>
+<col width="35%" />
+<col width="29%" />
+<col width="35%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Date (week of)</th>
@@ -89,7 +96,8 @@ code span.ot { color: #007020; }
 <tbody>
 <tr class="odd">
 <td>August 22</td>
-<td><a href="https://forms.gle/CUaDDMa7enTy3YL59">Class organization and scheduling</a></td>
+<td><a href="https://forms.gle/CUaDDMa7enTy3YL59">Class organization and
+scheduling</a></td>
 <td>-</td>
 </tr>
 <tr class="even">
@@ -104,12 +112,13 @@ code span.ot { color: #007020; }
 </tr>
 <tr class="even">
 <td>September 12</td>
-<td>dplyr and wrangling</td>
+<td><a href="Lectures/Lesson4.html">Intro to Regular Expressions</a>,
+dplyr and wrangling</td>
 <td>TBD</td>
 </tr>
 <tr class="odd">
 <td>September 19</td>
-<td>dplyr and wrangling, Intro to Regular Expressions</td>
+<td>dplyr and wrangling</td>
 <td>TBD</td>
 </tr>
 <tr class="even">
@@ -134,22 +143,26 @@ code span.ot { color: #007020; }
 </tr>
 <tr class="even">
 <td>October 24</td>
-<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student lessons</a></td>
+<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student
+lessons</a></td>
 <td>-</td>
 </tr>
 <tr class="odd">
 <td>October 31</td>
-<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student lessons</a></td>
+<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student
+lessons</a></td>
 <td>-</td>
 </tr>
 <tr class="even">
 <td>November 7</td>
-<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student lessons</a></td>
+<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student
+lessons</a></td>
 <td>-</td>
 </tr>
 <tr class="odd">
 <td>November 14</td>
-<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student lessons</a></td>
+<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student
+lessons</a></td>
 <td>-</td>
 </tr>
 <tr class="even">
@@ -159,7 +172,8 @@ code span.ot { color: #007020; }
 </tr>
 <tr class="odd">
 <td>November 28</td>
-<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student lessons</a></td>
+<td><a href="https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing">Student
+lessons</a></td>
 <td>-</td>
 </tr>
 <tr class="even">
