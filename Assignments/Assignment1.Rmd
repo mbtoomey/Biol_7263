@@ -1,0 +1,25 @@
+---
+title: 'BIOL7263 - Assignment #1'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: html_document
+---
+___
+The goal of this assignment is to setup an R project for your seminar work that is tracked with `git`, linked to your `GitHub` account, and contains a webpage to organize your assignment links. 
+
+ - Create a new repository in your github account named `YourLastNameBIOL7263`
+ - Create a new R project with version control and link it to this GitHub repository
+ - Create an `index.rmd` file with titled `BIOL7263 Portfolio` or something similar. 
+ - Knit this file to an html file
+ - Create an assignments folder in your project folder.
+ - Create an `Assignment1.rmd` file with titled `Assignment1` or something similar. Add the test `Hello World`. Save this file to the assignments folder
+ - Knit this file to an html
+ - Add a link to the `Assignment1.html` file in the `index.rmd` and knit. 
+ - Add files, commit changes, and push to GitHub 
+ - On the GitHub website, set up hosting of your `index.html` file.  
+ 
+ ___
+ 
+ When complete, email me:  
+ - The address of your GitHub repository: `https://github.com/YourGitHubUserName`  
+ - The address for your portfolio webpage: `https://YourGitHubUserName.github.io/LastNameBio381/`

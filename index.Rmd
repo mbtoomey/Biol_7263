@@ -24,10 +24,10 @@ ___
 
 ## Lecture Outlines & Homework Assignments
 
-Date (week of)  | Lecture | Homework
+Date (week of)  | Lecture | Assignments
 ------------- |----------- | -------------
 August 22  | [Class organization and scheduling](https://forms.gle/CUaDDMa7enTy3YL59) | -  
-August 29  | [Intro to R](Lectures/Lesson2a.html), RStudio, [Git](Lectures/Lesson2.html) | TBD  
+August 29  | [Intro to R](Lectures/Lesson2a.html), RStudio, [Git](Lectures/Lesson2.html) | [Assignment 1](Assignments/Assignment1.html)  
 September 5  | [Rmarkdown](Lectures/Lesson3.html) | TBD  
 September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html), dplyr and wrangling | TBD  
 September 19  | dplyr and wrangling| TBD  
