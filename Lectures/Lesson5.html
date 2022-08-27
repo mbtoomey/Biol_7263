@@ -12,7 +12,7 @@
 <meta name="author" content="M. Toomey" />
 
 
-<title>Wrangling Data with Dplyr</title>
+<title>Wrangling Data with dplyr</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,16 +362,16 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Wrangling Data with Dplyr</h1>
+<h1 class="title toc-ignore">Wrangling Data with <code>dplyr</code></h1>
 <h4 class="author">M. Toomey</h4>
 <h4 class="date">8/17/2022</h4>
 
 </div>
 
 
-<p>The <code>Dplyr</code> package contains a set of functions that are
+<p>The <code>dplyr</code> package contains a set of functions that are
 helpful in wrangling datasets into a useful format. The functions in
-Dplyr are referred to as verbs because they generally describe the
+dplyr are referred to as verbs because they generally describe the
 action that will be done to the dataset.</p>
 <div id="the-core-verbs" class="section level3">
 <h3>The core ‘verbs’</h3>
@@ -667,11 +667,18 @@ data so means and sd for soem groups are meaningless. Lets just look at
 groups where we have more than one mass observation.</p>
 <pre class="r"><code>starwars_cut %&gt;% 
   filter (mass &gt; 0) %&gt;% 
-  observations where mass &gt; 0. 
   group_by(species) %&gt;%
   mutate(count = n()) %&gt;% #Here we create a new variable that is a count of the total numbers of observations. Since the data are now grouped this action will be performed group-wise. 
   filter (count &gt; 1) %&gt;% #Now I can filter on that count to select only species where there are more than one observation. 
-  summarize(mean_mass = mean(mass), SD_mass =sd(mass)) #calculate mean and sd from the filtered and grouped Data. No intermediate files are created</code></pre>
+  summarize(mean_mass = mean(mass), SD_mass =sd(mass)) #calculate mean and sd from the filtered and grouped Data. No intermediate files are created
+  
+#We can condense this and remove the mutate verb
+
+starwars_cut %&gt;% 
+  filter (mass &gt; 0) %&gt;% 
+  group_by(species) %&gt;%
+  filter (n() &gt; 1) %&gt;% #In one step this will calculate the group count and filter by that count
+  summarize(mean_mass = mean(mass), SD_mass =sd(mass)) </code></pre>
 </div>
 
 

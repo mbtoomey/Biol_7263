@@ -271,21 +271,19 @@ starwars_cut %>% #take the starwars_cut data set and pass it to next step
 
 Our current data set has anumber of single observation and missing data so means and sd for soem groups are meaningless. Lets just look at groups where we have more than one mass observation. 
 
-
 ```{r eval=FALSE}
 starwars_cut %>% 
   filter (mass > 0) %>% 
-  observations where mass > 0. 
   group_by(species) %>%
   mutate(count = n()) %>% #Here we create a new variable that is a count of the total numbers of observations. Since the data are now grouped this action will be performed group-wise. 
   filter (count > 1) %>% #Now I can filter on that count to select only species where there are more than one observation. 
   summarize(mean_mass = mean(mass), SD_mass =sd(mass)) #calculate mean and sd from the filtered and grouped Data. No intermediate files are created
-```
-
-
-
- 
-
-
-
   
+#We can condense this and remove the mutate verb
+
+starwars_cut %>% 
+  filter (mass > 0) %>% 
+  group_by(species) %>%
+  filter (n() > 1) %>% #In one step this will calculate the group count and filter by that count
+  summarize(mean_mass = mean(mass), SD_mass =sd(mass)) 
+```
