@@ -1,0 +1,29 @@
+---
+title: 'BIOL7263 - Assignment #2'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+The goal of this assignment is to build your Biol7263 portfolio page, the `index.rmd` file and practice using elements of the Rmarkdown language.  
+
+- Add a brief introduction to yourself at the top of the page with headings that include:
+    - **Educational Experience**
+    - **Research Interests** 
+        - include a link to your own website (if you have one) or your current lab or advisor's website
+        - Include an image form your research. This could be a photo of your study site, research organism, or a cool data figure.  
+  
+  
+- Create a table where you will link to your assignments in the assignments folder. 
+  - This should include three columns: date, descriptive name, and the assignment link.
+- Try out some Rmarkdown themes discussed [here](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and pick one for your portfolio.
+- Commit these changes and push them to your github repository
+  
+  
+    
+
+
+ 
