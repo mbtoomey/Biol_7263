@@ -194,7 +194,7 @@ What if we want the full sequence of a specific gene in this file. We can use `s
 ```
 #Here I modified the FASTA to add a space between transcripts. Then I selected the line between the first line containing "BCO2" and nest line beginning with a space. I used a pipe "|" to pass the output from the first to the second command. 
 
-sed 's/>/ \n>/g' GCF_015476345.1_ZJU1.0_rna.fna | sed -n '/BCO2/,/^\s/p' > BCO2.txt
+sed 's/>/ \n>/g' GCF_015476345.1_ZJU1.0_rna.fna | sed -n '/BCO2/,/^ /p' > BCO2.txt
 
 head BCO2.txt
 ```

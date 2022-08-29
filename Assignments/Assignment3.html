@@ -11,8 +11,9 @@
 
 <meta name="author" content="Matthew Toomey" />
 
+<meta name="date" content="2022-08-29" />
 
-<title>Regular Expressions</title>
+<title>BIOL7263 - Assignment #3</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,202 +363,126 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Regular Expressions</h1>
+<h1 class="title toc-ignore">BIOL7263 - Assignment #3</h1>
 <h4 class="author">Matthew Toomey</h4>
-<h4 class="date">8/16/2022</h4>
+<h4 class="date">2022-08-29</h4>
 
 </div>
 
 
-<p>Regular expression are a powerful tool to search text files and
-extract and edit elements in those files. They can make quick work of
-formatting problems and highly repetitive tasks. If you find yourself
-repetitively clicking, cutting, pasting, deleting, etc. to clean up a
-problematic file, you might be able to solve your problem quickly with a
-regular expression.</p>
-<p>First we will work with regular expressions in our text editor. I
-will be using <a href="https://notepad-plus-plus.org/downloads/">Notepad++</a></p>
-<div id="wildcards" class="section level3">
-<h3>Wildcards</h3>
-<ul>
-<li><code>\w</code> a single word character [letter,number or
-<code>_</code>]</li>
-<li><code>\d</code> a single number character [0-9]</li>
-<li><code>\t</code> a single tab space</li>
-<li><code>\s</code> a single space, tab, or line break</li>
-<li><code>\n</code> a single line break (or try <code>\r</code>)</li>
-</ul>
-<p>WIth wildcards we can quickly swap spaces for line breaks, which can
-be useful when tidying list.</p>
-<pre><code>INPUT: larry curly moe
-SEARCH: \s
-REPLACE: \n
-RESULT: 
-larry 
-curly
-moe</code></pre>
-</div>
-<div id="quantifiers" class="section level3">
-<h3>Quantifiers</h3>
-<ul>
-<li><p>add these on to any of the wildcards</p></li>
-<li><p><code>\w+</code> one or more consecutive word characters</p></li>
-<li><p><code>\w*</code> zero or more consecutive word
-characters</p></li>
-<li><p><code>\w{3}</code> exactly 3 consecutive word characters</p></li>
-<li><p><code>\w{3,}</code> 3 or more consecutive word
-characters</p></li>
-<li><p><code>\w{3,5}</code> 3, 4, or 5 consecutive word
-characters</p></li>
-</ul>
-</div>
-<div id="repair-text-cut-and-pasted-from-a-pdf" class="section level3">
-<h3>Repair text cut and pasted from a pdf</h3>
-<pre><code>INPUT: Phenotypic plasticity, the ability of a single genotype 
-to  express  different  phenotypes  depending  on  envi-
-ronmental conditions, is a key determinant of organ-
-ismal performance and greatly influences ecological 
-interactions. Its role in evolution is also increasingly 
-acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pig-
-liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-
-Eberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick 
-Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfen-
-nig  et  al.,  2010).
-
-SEARCH: \n #find the line breaks. In my system I had to remove with both \n and \r
-
-REPLACE: (nothing)
-
-RESULT: Phenotypic plasticity, the ability of a single genotype   to  express  different  phenotypes  depending  on  envi-  ronmental conditions, is a key determinant of organ-  ismal performance and greatly influences ecological   interactions. Its role in evolution is also increasingly   acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pig-  liucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  West-  Eberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick   Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfen-  nig  et  al.,  2010).</code></pre>
-<p>This still needs work. The word spcaing is variable and there are “-”
-in the text.</p>
-<pre><code>INPUT: from above
-
-SEARCH: -\s+ #this will find the &quot;-&quot; and the spaces that follow
-
-REPLACE: (nothing) # this will delete 
-
-RESULT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick  Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig  et  al.,  2010).</code></pre>
-<p>Now we just need to fix the line spacing</p>
-<pre><code>INPUT: from above
-
-SEARCH: \s+
-
-REPLACE: &quot; &quot; #input a single space
-
-RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged (Bradshaw, 1965; Schlichting &amp; Pigliucci, 1998; Agrawal, 2001; Pigliucci, 2001; WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig et al., 2010).</code></pre>
-<div id="the-zero-or-more-quantifier" class="section level4">
-<h4>The zero or more <code>*</code> quantifier</h4>
-<pre><code>INPUT: vanilla , chocolate, strawberry ,   rocky road,   mint chocolate chip
-
-SEARCH: \s*,\s*
-
-REPLACE: ,  #note the replacement is &quot;,&quot; and a space &quot; &quot;
-
-RESULT: vanilla, chocolate, strawberry, rocky road, mint chocolate chip</code></pre>
-</div>
-<div id="for-all-the-rest" class="section level4">
-<h4><code>.*</code> for “all the rest”</h4>
-<pre><code>INPUT: Phenotypic plasticity, the ability of a single genotype  to  express  different  phenotypes  depending  on  environmental conditions, is a key determinant of organismal performance and greatly influences ecological  interactions. Its role in evolution is also increasingly  acknowledged  (Bradshaw,  1965;  Schlichting  &amp;  Pigliucci,  1998;  Agrawal,  2001; Pigliucci,  2001;  WestEberhard, 2003; DeWitt &amp; Scheiner, 2004; Van Snick  Gray &amp; Stauffer, 2004; Fusco &amp; Minelli, 2010; Pfennig  et  al.,  2010).
-
-SEARCH: \s+\(.*\) #note that &quot;(&quot; and &quot;)&quot; are regex operators so we need to escape and use the literal character by adding the &quot;\&quot; in front of them
-
-Replace: (nothing)
-
-RESULT: Phenotypic plasticity, the ability of a single genotype to express different phenotypes depending on environmental conditions, is a key determinant of organismal performance and greatly influences ecological interactions. Its role in evolution is also increasingly acknowledged.</code></pre>
-</div>
-<div id="capturing-and-repalcing-text-elements" class="section level4">
-<h4>Capturing and repalcing text elements</h4>
-<p>Working with genus and species names</p>
-<pre><code>INPUT: 
-Haemorhous cassinii 
-Haemorhous purpureus 
-Haemorhous mexicanus
-SEARCH: (\w)\w+ (\w+) #capture first letter, skip rest of word and space, capture all of next word
-REPLACE: \1_\2 # paste capture element 1 add an &quot;_&quot; and paste capture element 2. 
-RESULT:
-H_cassinii  
-H_purpureus 
-H_mexicanus</code></pre>
 <hr />
-</div>
-</div>
-<div id="regular-expression-and-very-large-file-in-the-shell" class="section level2">
-<h2>Regular expression and very large file in the shell</h2>
-<p>Regular expressions can also be implemented in the UNIX shell. This
-is can be particularly useful when handling very large files like those
-generated in genomics analyses.</p>
-<p>For some basic operation in the shell see - <a href="Shell_Navigation.html">Navigating the UNIX shell</a></p>
-<p>In the shell there are several different basic tools that use regular
-expressions including:<br />
-- <code>grep</code> for searching text<br />
-- <code>sed</code> to transform text - find and replace functions<br />
-- <code>awk</code> functions similar to grep and sed, but a different
-approach to implementation</p>
-<p>Note that the way that regular expressions are coded in each of these
-is different than the preceding examples.</p>
-<div id="using-grep-to-pull-headers-from-a-fasta" class="section level3">
-<h3>Using grep to pull headers from a FASTA</h3>
-<p>For this example I downloaded the complete transcript sequences of
-the Mallard Duck <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/476/345/GCF_015476345.1_ZJU1.0/GCF_015476345.1_ZJU1.0_rna.fna.gz"><em>Anas
-platyrhynchus</em></a>.</p>
-<p>Open the shell in the terminal of Rstudio. If you are using a windows
-machine, be sure to set the options foe the terminal to
-<code>Git Bash</code>. Navigate to the folder containing the FASTA.</p>
-<p>Now we will copy every line starting this “&gt;” to a new file called
-Duck_headers.txt</p>
-<pre><code>#The file is compressed, so first we will unzip it: 
-
-gunzip GCF_015476345.1_ZJU1.0_rna.fna.gz
-
-#Then we can use grep to pull all of the headers
-
-grep &#39;^&gt;&#39; GCF_015476345.1_ZJU1.0_rna.fna &gt; Duck_headers.txt
-
-head Duck_header.txt
-
-RESULT: 
-
-&gt;NM_001285955.2 Anas platyrhynchos acireductone dioxygenase 1 (ADI1), mRNA
-&gt;NM_001285957.1 Anas platyrhynchos ribosomal protein S7 (RPS7), mRNA
-&gt;NM_001289841.1 Anas platyrhynchos ornithine decarboxylase antizyme 1 (OAZ1), mRNA
-&gt;NM_001291578.1 Anas platyrhynchos antizyme inhibitor 1 (AZIN1), mRNA
-&gt;NM_001310341.1 Anas platyrhynchos TNF superfamily member 13b (TNFSF13B), mRNA
-&gt;NM_001310342.1 Anas platyrhynchos RAB11A, member RAS oncogene family (RAB11A), mRNA
-&gt;NM_001310343.1 Anas platyrhynchos fatty acid binding protein 2 (FABP2), mRNA
-&gt;NM_001310344.1 Anas platyrhynchos free fatty acid receptor 3 (LOC101802760), mRNA
-&gt;NM_001310345.1 Anas platyrhynchos growth hormone 1 (GH1), mRNA
-&gt;NM_001310346.1 Anas platyrhynchos ras homolog family member A (RHOA), mRNA</code></pre>
-</div>
-<div id="uisng-sed-to-clean-up-the-headers" class="section level3">
-<h3>Uisng <code>sed</code> to clean up the headers</h3>
-<p>#Here we can capture specific elements of the pattern with
-<code>\(</code> and <code>\)</code></p>
-<pre><code>sed &#39;s/\(\&gt;\w*\..\).*.(\(...*\)).*/\1 \2/&#39; Duck_headers.txt &gt; num_symbol.txt
-
-head num_symbol.txt
-
-&gt;NM_001285955.2 ADI1
-&gt;NM_001285957.1 RPS7
-&gt;NM_001289841.1 OAZ1
-&gt;NM_001291578.1 AZIN1
-&gt;NM_001310341.1 TNFSF13B
-&gt;NM_001310342.1 RAB11A
-&gt;NM_001310343.1 FABP2
-&gt;NM_001310344.1 LOC101802760
-&gt;NM_001310345.1 GH1
-&gt;NM_001310346.1 RHOA\</code></pre>
-</div>
-<div id="using-sed-to-find-a-gene-by-name" class="section level3">
-<h3>Using <code>sed</code> to find a gene by name</h3>
-<p>What if we want the full sequence of a specific gene in this file. We
-can use <code>sed</code> to capture a range of lines from the FASTA</p>
-<pre><code>#Here I modified the FASTA to add a space between transcripts. Then I selected the line between the first line containing &quot;BCO2&quot; and nest line beginning with a space. I used a pipe &quot;|&quot; to pass the output from the first to the second command. 
-
-sed &#39;s/&gt;/ \n&gt;/g&#39; GCF_015476345.1_ZJU1.0_rna.fna | sed -n &#39;/BCO2/,/^ /p&#39; &gt; BCO2.txt
-
-head BCO2.txt</code></pre>
-</div>
+<div id="regular-expression-challenges" class="section level1">
+<h1>Regular expression challenges</h1>
+<p>For these problems, use your plain text editor (e.g. Notepad++).
+Paste the test into a new docuemnt and use the search function to write
+a regular expression that gives the desired result. Submit your
+assignment as the html output of an Rmarkdown documnet linked in your
+class portfolio. In that document, provide the regular expression that
+works (there may be several possible “right” answers) as plain text
+markdown page followed by an explanantion of what each element the
+expression is doing. If you get stuck, give the solution that gets you
+as close as you can.</p>
+<ol style="list-style-type: decimal">
+<li>Our preferred format for data is a csv file. Use regular expressions
+to convert this table I copied form a pdf into a csv format.</li>
+</ol>
+<pre><code>Candidate Choice    Absentee Mail   Early Voting    Election Day    Total Votes
+TODD RUSS   7,021   8,194   135,216   150,431
+CLARK JOLLEY    7,012   5,835   107,714   120,561</code></pre>
+<ul>
+<li>Result</li>
+</ul>
+<pre><code>Candidate Choice,  Absentee Mail, Early Voting,  Election Day,  Total Votes
+TODD RUSS, 7021, 8194, 135216, 150431
+CLARK JOLLEY,  7012, 5835, 107714, 120561</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Reformat our class roster.</li>
+</ol>
+<pre><code>Adamic, Emily M.    ema3896@utulsa.edu
+Bierbaum, Emily L.  elb0588@utulsa.edu
+Cartmell, Laci J.   ljc454@utulsa.edu
+Delaporte, Elise    eld0070@utulsa.edu
+Hansen, Rebekah E.  reh9623@utulsa.edu
+Herrboldt, Madison A.   mah1626@utulsa.edu
+Lewis, Cari D.  cdl5261@utulsa.edu
+Mierow, Tanner T.   ttm5619@utulsa.edu
+Naranjo, Daniel S.  dsn8679@utulsa.edu
+Paslay, Caleb   cap1050@utulsa.edu
+Pletcher, Olivia M. omp9336@utulsa.edu
+West, Amy C.    acw1471@utulsa.edu</code></pre>
+<ul>
+<li>Result</li>
+</ul>
+<pre><code>Emily Adamic (ema3896@utulsa.edu)
+Emily Bierbaum (elb0588@utulsa.edu)
+Laci Cartmell (ljc454@utulsa.edu)
+Elise Delaporte (eld0070@utulsa.edu)
+Rebekah Hansen (reh9623@utulsa.edu)
+Madison Herrboldt (mah1626@utulsa.edu)
+Cari Lewis (cdl5261@utulsa.edu)
+Tanner Mierow (ttm5619@utulsa.edu)
+Daniel Naranjo (dsn8679@utulsa.edu)
+Caleb Paslay (cap1050@utulsa.edu)
+Olivia Pletcher (omp9336@utulsa.edu)
+Amy West (acw1471@utulsa.edu)</code></pre>
+<p>Here is a data set with common names, genus species, and a numeric
+variable</p>
+<pre><code>Banded sculpin, Cottus carolinae, 5
+Redspot chub, Nocomis asper, 5
+Northern hog sucker, Hypentelium nigricans, 6
+Creek chub, Semotilus atromaculatus, 8
+Stippled darter, Etheostoma punctulatum, 9
+Smallmouth bass, Micropterus dolomieu, 10
+Logperch, Percina caprodes, 13
+Slender madtom, Noturus exilis, 14</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Use a regular expression to drop the genus species name:</li>
+</ol>
+<pre><code>Banded sculpin, 5
+Redspot chub, 5
+Northern hog sucker, 6
+Creek chub, 8
+Stippled darter, 9
+Smallmouth bass, 10
+Logperch, 13
+Slender madtom, 14</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>With the original data set, use regular expression to modify the
+names like this:</li>
+</ol>
+<pre><code>Banded sculpin, C_carolinae, 5
+Redspot chub, N_asper, 5
+Northern hog sucker, H_nigricans, 6
+Creek chub, S_atromaculatus, 8
+Stippled darter, E_punctulatum, 9
+Smallmouth bass, M_dolomieu, 10
+Logperch, P_caprodes, 13
+Slender madtom, N_exilis, 14</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>starting with the original data set abbreviate the genus species
+like this:</li>
+</ol>
+<pre><code>Banded sculpin, C_car., 5
+Redspot chub, N_asp., 5
+Northern hog sucker, H_nig., 6
+Creek chub, S_atr., 8
+Stippled darter, E_pun., 9
+Smallmouth bass, M_dol., 10
+Logperch, P_cap., 13
+Slender madtom, N_exi., 14</code></pre>
+<hr />
+<p>For these questions download a transcript or protein FASTA for you
+favorite species with a complete nuclear and mitochondrial geneome from
+<a href="https://www.ncbi.nlm.nih.gov/datasets/">NCBI Datasets</a>.</p>
+<p>Use the UNIX shell with grep and sed commands for the following
+question. In you assignment Provide the command you used, explain what
+it does, and provide the head or tail of the output.</p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Create a new file that contains only the fasta headers (lines
+that begin with &gt;) from your file.</p></li>
+<li><p>Create a new file that contains the full sequences of only the
+ribosomal transcripts or proteins.</p></li>
+</ol>
 </div>
 
 

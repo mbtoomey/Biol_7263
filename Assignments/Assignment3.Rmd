@@ -1,0 +1,131 @@
+---
+title: 'BIOL7263 - Assignment #3'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+# Regular expression challenges 
+
+For these problems, use your plain text editor (e.g. Notepad++). Paste the test into a new docuemnt and use the search function to write a regular expression that gives the desired result. Submit your assignment as the html output of an Rmarkdown documnet linked in your class portfolio. In that document, provide the regular expression that works (there may be several possible "right" answers) as plain text markdown page followed by an explanantion of what each element the expression is doing. If you get stuck, give the solution that gets you as close as you can.
+
+1. Our preferred format for data is a csv file. Use regular expressions to convert this table I copied form a pdf into a csv format. 
+
+```
+Candidate Choice	Absentee Mail	Early Voting	Election Day	Total Votes
+TODD RUSS	7,021	8,194	135,216   150,431
+CLARK JOLLEY	7,012	5,835	107,714   120,561
+```
+  - Result  
+
+```
+Candidate Choice,  Absentee Mail, Early Voting,  Election Day,  Total Votes
+TODD RUSS, 7021, 8194, 135216, 150431
+CLARK JOLLEY,  7012, 5835, 107714, 120561
+```
+
+2. Reformat our class roster. 
+```
+Adamic, Emily M.	ema3896@utulsa.edu
+Bierbaum, Emily L.	elb0588@utulsa.edu
+Cartmell, Laci J.	ljc454@utulsa.edu
+Delaporte, Elise	eld0070@utulsa.edu
+Hansen, Rebekah E.	reh9623@utulsa.edu
+Herrboldt, Madison A.	mah1626@utulsa.edu
+Lewis, Cari D.	cdl5261@utulsa.edu
+Mierow, Tanner T.	ttm5619@utulsa.edu
+Naranjo, Daniel S.	dsn8679@utulsa.edu
+Paslay, Caleb	cap1050@utulsa.edu
+Pletcher, Olivia M.	omp9336@utulsa.edu
+West, Amy C.	acw1471@utulsa.edu
+```
+
+  - Result
+  
+```
+Emily Adamic (ema3896@utulsa.edu)
+Emily Bierbaum (elb0588@utulsa.edu)
+Laci Cartmell (ljc454@utulsa.edu)
+Elise Delaporte (eld0070@utulsa.edu)
+Rebekah Hansen (reh9623@utulsa.edu)
+Madison Herrboldt (mah1626@utulsa.edu)
+Cari Lewis (cdl5261@utulsa.edu)
+Tanner Mierow (ttm5619@utulsa.edu)
+Daniel Naranjo (dsn8679@utulsa.edu)
+Caleb Paslay (cap1050@utulsa.edu)
+Olivia Pletcher (omp9336@utulsa.edu)
+Amy West (acw1471@utulsa.edu)
+```
+
+Here is a data set with common names, genus species, and a numeric variable 
+```
+Banded sculpin, Cottus carolinae, 5
+Redspot chub, Nocomis asper, 5
+Northern hog sucker, Hypentelium nigricans, 6
+Creek chub, Semotilus atromaculatus, 8
+Stippled darter, Etheostoma punctulatum, 9
+Smallmouth bass, Micropterus dolomieu, 10
+Logperch, Percina caprodes, 13
+Slender madtom, Noturus exilis, 14
+```
+
+3. Use a regular expression to drop the genus species name:
+```
+Banded sculpin, 5
+Redspot chub, 5
+Northern hog sucker, 6
+Creek chub, 8
+Stippled darter, 9
+Smallmouth bass, 10
+Logperch, 13
+Slender madtom, 14
+```
+
+
+4. With the original data set, use regular expression to modify the names like this:
+  
+```
+Banded sculpin, C_carolinae, 5
+Redspot chub, N_asper, 5
+Northern hog sucker, H_nigricans, 6
+Creek chub, S_atromaculatus, 8
+Stippled darter, E_punctulatum, 9
+Smallmouth bass, M_dolomieu, 10
+Logperch, P_caprodes, 13
+Slender madtom, N_exilis, 14
+```
+
+5. starting with the original data set abbreviate the genus species like this:
+
+```
+Banded sculpin, C_car., 5
+Redspot chub, N_asp., 5
+Northern hog sucker, H_nig., 6
+Creek chub, S_atr., 8
+Stippled darter, E_pun., 9
+Smallmouth bass, M_dol., 10
+Logperch, P_cap., 13
+Slender madtom, N_exi., 14
+```
+___
+
+For these questions download a transcript or protein FASTA for you favorite species with a complete nuclear and mitochondrial geneome from [NCBI Datasets](https://www.ncbi.nlm.nih.gov/datasets/). 
+
+Use the UNIX shell with grep and sed commands for the following question. In you assignment Provide the command you used, explain what it does, and provide the head or tail of the output. 
+
+6. Create a new file that contains only the fasta headers (lines that begin with >) from your file. 
+
+7. Create a new file that contains the full sequences of only the ribosomal transcripts or proteins.  
+
+
+
+
+  
+  
+    
+
+
+ 
