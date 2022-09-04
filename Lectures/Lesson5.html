@@ -679,6 +679,79 @@ starwars_cut %&gt;%
   group_by(species) %&gt;%
   filter (n() &gt; 1) %&gt;% #In one step this will calculate the group count and filter by that count
   summarize(mean_mass = mean(mass), SD_mass =sd(mass)) </code></pre>
+<hr />
+</div>
+<div id="data-import-and-export-with-readr" class="section level2">
+<h2>Data Import and Export with <code>readr</code></h2>
+<p>Readr is a package that is part of Tidyverse with a range of
+functions to facilitate the paresing and import of data files into R. It
+replicates and expands many of the existing function in base R</p>
+<div id="importing-.csv-files" class="section level3">
+<h3>Importing .csv files</h3>
+<p>Download my ebird dataset from my github account here: <a href="https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true" class="uri">https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true</a></p>
+<p>Create a “Data” folder in your project and save this files there.</p>
+<pre class="r"><code>MBT_ebird&lt;-read_csv(&quot;Data/MBT_ebird.csv&quot;) #read in my ebird csv file from my github account</code></pre>
+<p>You can often read files in directly from the web by putting in the
+web address as the path.</p>
+<pre class="r"><code>MBT_ebird&lt;-read_csv(&quot;https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true&quot;) #read in my ebird csv file from my github account</code></pre>
+<p>Readr has a varitey of other functions to import other data
+formats</p>
+<ul>
+<li><code>read_tsv()</code> - tab separated data</li>
+<li><code>read_table()</code> - fixed width files with white space
+separation</li>
+<li><code>read_delim()</code> - any delimiter that you specify</li>
+</ul>
+</div>
+<div id="column-names" class="section level3">
+<h3>Column Names</h3>
+<p>By default <code>read_csv</code> willl use the first lines as the
+column names in the resulting tibble. If there are not column names you
+can omit them:</p>
+<p><code>MBT_ebird&lt;-read_csv(&quot;Data/MBT_ebird.csv&quot;, col_names = FALSE)</code></p>
+<p>or you can provide a vector of names:</p>
+<p><code>MBT_ebird&lt;-read_csv(&quot;Data/MBT_ebird.csv&quot;, co_names = c(&quot;entry&quot;, &quot;list_ID&quot;, &quot;common_name&quot;)</code></p>
+</div>
+<div id="parsing" class="section level3">
+<h3>Parsing</h3>
+<p>View the imported file</p>
+<pre class="r"><code>glimpse(MBT_ebird)</code></pre>
+<p>You will notice that <code>date</code> and <code>time</code> columns
+were automatically assigned to the correct data type. Readr uses the
+following rules, by default to classify data as it is reads in:</p>
+<ul>
+<li>logical: contains only “F”, “T”, “FALSE”, or “TRUE”.</li>
+<li>integer: contains only numeric characters (and -).</li>
+<li>double: contains only valid doubles (including numbers like
+4.5e-5).</li>
+<li>number: contains valid doubles with the grouping mark inside.</li>
+<li>time: matches the default time_format.</li>
+<li>date: matches the default date_format.</li>
+<li>date-time: any ISO8601 date.</li>
+</ul>
+<p>If none of these rules apply, then the column will stay as a vector
+of strings.</p>
+</div>
+<div id="importing-directly-from-excel-and-googlesheets-not-recommended" class="section level3">
+<h3>Importing directly from Excel and googlesheets <strong>not
+recommended</strong></h3>
+<p>There are tools to do this, but I would avoid this if possible as
+these are likely to be buggy and unpredictable.</p>
+<ul>
+<li>Excel - <a href="https://readxl.tidyverse.org/" class="uri">https://readxl.tidyverse.org/</a></li>
+<li>GoogleSheets - <a href="https://googlesheets4.tidyverse.org/" class="uri">https://googlesheets4.tidyverse.org/</a></li>
+</ul>
+</div>
+<div id="exporting-data" class="section level3">
+<h3>Exporting data</h3>
+<p>Readr can export tibbles you create in R is several formats:</p>
+<ul>
+<li><code>write_delim(x, file, delim = &quot; &quot;)</code> - Write files with
+any delimiter.</li>
+<li><code>write_csv(x, file)</code> - Write a comma delimited file.</li>
+<li><code>write_tsv(x, file)</code> - Write a tab delimited file.</li>
+</ul>
+</div>
 </div>
 
 
