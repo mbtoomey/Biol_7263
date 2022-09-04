@@ -287,3 +287,13 @@ starwars_cut %>%
   filter (n() > 1) %>% #In one step this will calculate the group count and filter by that count
   summarize(mean_mass = mean(mass), SD_mass =sd(mass)) 
 ```
+
+___
+
+### Data Import and Export with Readr
+
+Readr is a package that is part of Tidyverse with a range of functions to facilitate the paresing and import of data files into R. It replicates and expands many of the existing function in base R
+
+####Importing CSV files
+
+
