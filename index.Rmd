@@ -53,4 +53,24 @@ ___
 - 21-25 November: Thanksgiving Break
 - 5 December: Last day of classes
 
+___
+
+## Member portfolios
+
+Name  | Github site | Portfolio website
+------------- |----------- | -------------
+Elise Delaporte|[GitHub](https://github.com/elisead3)|[Portfolio](https://elisead3.github.io/DelaporteBIOL7263/)
+Emily Adamic|[Github](https://github.com/emadamic)|[Portfolio](https://emadamic.github.io/AdamicBIOL7263/)
+Madison Herrboldt|[Github](https://github.com/madisonherrboldt)|[Portfolio](https://madisonherrboldt.github.io/HerrboldtBIOL7263/)
+Rebekah Hansen|[Github](https://github.com/bhansen21)|[Portfolio](https://bhansen21.github.io/HansenBIOL7263/)
+Anand Karki|[Github](https://github.com/abk774-22)|[Portfolio](https://abk774-22.github.io/KarkiBIOL7263_learning/)
+Cari Lewis|[Github](https://github.com/Cari-D-Lewis)|[Portfolio](https://cari-d-lewis.github.io/LewisBIOL7263/)
+Morgan Beeman|[Github](https://github.com/Nezara-viridula)|[Portfolio](https://nezara-viridula.github.io/BeemanBiol7262/)
+Olivia Pletcher|[Github](https://github.com/omp9336)|[Portfolio](https://omp9336.github.io/PletcherBIOL7263/)
+Amy West|[Github](https://github.com/Amycwest)|[Portfolio](https://amycwest.github.io/WestBIOL7263/)
+
+
+
+
+
 

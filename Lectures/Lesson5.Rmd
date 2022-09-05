@@ -346,6 +346,8 @@ You will notice that `date` and `time` columns were automatically assigned to th
 
 If none of these rules apply, then the column will stay as a vector of strings.
 
+For specific data import problems these rules can be overridden with specifications within the the function call. More details here: https://readr.tidyverse.org/articles/readr.html
+
 ### Importing directly from Excel and googlesheets **not recommended**
 
 There are tools to do this, but I would avoid this if possible as these are likely to be buggy and unpredictable. 
