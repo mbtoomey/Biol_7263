@@ -134,7 +134,7 @@ Branching
   - adds a new branch  
 - `git checkout <name of new branch>`
 	- switches to the new branch
-- `git merge --log working`
+- `git merge --log <name of branch to be merged into current>`
 	- first switch to branch you want to merge into
 	- merges working branch back into main with commit comments
 - `git branch -d <name>`
