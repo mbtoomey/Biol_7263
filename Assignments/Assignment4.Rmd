@@ -1,0 +1,33 @@
+---
+title: 'BIOL7263 - Assignment #4'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+## `dplyr` exercises
+
+For these exercise download and import the data files containing my Ebird observations from here: https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true
+
+Using the functions in `dplyr` and base `R` answer the following questions. Create a mark down files that documents the answer and the code you used to answer the question. Also include a link the a commented R script where all of the code can be run to reproduce your answers
+
+1. In which year did I observe the most individual birds? How many?
+
+2. In that year how many different species of birds did I observe? 
+
+3. In which state did I most frequently observe Red-winged Blackbirds? 
+
+4. Filter observations for a duration between 5 and 200 minutes. Calculate the mean rate per checklist that I encounter species each year. Specifically, calculate the number of species in each checklist divided by time and then take the mean for the year. 
+
+5. Create a data frame that includes the complete observations for the top 10 most frequently observed species. First generate a top 10 list and then use this list to filter all observations. 
+
+
+  
+  
+    
+
+
+ 
