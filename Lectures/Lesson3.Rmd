@@ -131,7 +131,7 @@ ___
 | House Sparrow   | Medium|
 | Tree Sparrow  | High|
 
-The "-" set the width of column
+The "-" separates the header from the rest of the column
 The ":" set the justification
 
 
