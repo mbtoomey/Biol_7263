@@ -173,8 +173,8 @@ This chart from the R for Data Science text is helpful for thinking about how to
 `slice()` is another useful tool for subsetting that allows you to select specfic rows of data  
 
 - `slice_head()` and `slice_tail()` select the first or last rows. You can select a specific number of by including `n=<NUMBER>`  
-- slice_sample() randomly selects rows.  
-- slice_min() and slice_max() select rows with highest or lowest values of a variable.
+- `slice_sample()` randomly selects rows.  
+- `slice_min()` and `slice_max()` select rows with highest or lowest values of a variable.
 
 ```{r eval=FALSE}
 # return the top 5 rows of the starwars_cut dataset
