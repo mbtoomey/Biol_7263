@@ -82,7 +82,7 @@ starwars_cut3 <- select(starwars, !c(films, vehicles, starships))
 
 #we can also slect all variables that are not (!) lists  
 
-starwars_cut3 <- select(starwars, !where(is.list))
+starwars_cut <- select(starwars, !where(is.list))
 ```
 
 ### Helper functions 
@@ -169,6 +169,17 @@ filter(starwars_cut, eye_color %in% c("black","blue"))
 This chart from the R for Data Science text is helpful for thinking about how to specify sets for filtering:
 
 ![Boolean sets](https://d33wubrfki0l68.cloudfront.net/01f4b6d39d2be8269740a3ad7946faa79f7243cf/8369a/diagrams/transform-logical.png)
+
+`slice()` is another useful tool for subsetting that allows you to select specfic rows of data  
+
+- `slice_head()` and `slice_tail()` select the first or last rows. You can select a specific number of by including `n=<NUMBER>`  
+- slice_sample() randomly selects rows.  
+- slice_min() and slice_max() select rows with highest or lowest values of a variable.
+
+```{r eval=FALSE}
+# return the top 5 rows of the starwars_cut dataset
+slice_head(starwars_cut, n=5)
+```
 
 ____
 
