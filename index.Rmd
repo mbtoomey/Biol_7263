@@ -69,9 +69,10 @@ Cari Lewis|[Github](https://github.com/Cari-D-Lewis)|[Portfolio](https://cari-d-
 Morgan Beeman|[Github](https://github.com/Nezara-viridula)|[Portfolio](https://nezara-viridula.github.io/BeemanBiol7262/)
 Olivia Pletcher|[Github](https://github.com/omp9336)|[Portfolio](https://omp9336.github.io/PletcherBIOL7263/)
 Amy West|[Github](https://github.com/Amycwest)|[Portfolio](https://amycwest.github.io/WestBIOL7263/)
-Caleb Paslay|[Github](https://github.com/CalebPaz28)|[Portfolio]()
+Caleb Paslay|[Github](https://github.com/CalebPaz28)|[Portfolio](https://calebpaz28.github.io/PaslayBIOL7263/)
 Laci Cartmell|[Github](https://github.com/laci-cartmell)|[Portfolio](https://laci-cartmell.github.io/CARTMELLBIOL7263.rmd/)
-
+Emily Bierbaum|[Github](https://github.com/EmilyBierbaum/)|[Portfolio](https://emilybierbaum.github.io/BierbaumBIOL7263/)
+Tanner Mierow|[Github](https://github.com/tanman6711/MierowBIOL7263)|[Portfolio](https://tanman6711.github.io/MierowBIOL7263/)
 
 
 
