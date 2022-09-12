@@ -10,7 +10,7 @@ ___
 
 # Regular expression challenges 
 
-For these problems, use your plain text editor (e.g. Notepad++). Paste the test into a new docuemnt and use the search function to write a regular expression that gives the desired result. Submit your assignment as the html output of an Rmarkdown documnet linked in your class portfolio. In that document, provide the regular expression that works (there may be several possible "right" answers) as plain text markdown page followed by an explanantion of what each element the expression is doing. If you get stuck, give the solution that gets you as close as you can.
+For these problems, use your plain text editor (e.g. Notepad++). Paste the test into a new document and use the search function to write a regular expression that gives the desired result. Submit your assignment as the html output of an Rmarkdown document linked in your class portfolio. In that document, provide the regular expression that works (there may be several possible "right" answers) as plain text markdown page followed by an explanation of what each element the expression is doing. If you get stuck, give the solution that gets you as close as you can.
 
 1. Our preferred format for data is a csv file. Use regular expressions to convert this table I copied form a pdf into a csv format. 
 

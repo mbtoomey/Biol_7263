@@ -20,6 +20,8 @@ This site contains course materials for BIOL7263 Data Wrangling and Visualizatio
 
 [Course Syllabus](CourseMaterials/CourseSyllabus.html)   
 
+[Lesson Presentation Assignment](Assignments/LessonAssignment.html)   
+
 ___
 
 ## Lecture Outlines & Homework Assignments
@@ -27,10 +29,10 @@ ___
 Date (week of)  | Lecture | Assignments
 ------------- |----------- | -------------
 August 22  | [Class organization and scheduling](https://forms.gle/CUaDDMa7enTy3YL59) | -  
-August 29  | [Intro to R](Lectures/Lesson2a.html), RStudio, [Git](Lectures/Lesson2.html) | [Assignment 1](Assignments/Assignment1.html)  
+August 29  | RStudio, [Git](Lectures/Lesson2.html) | [Assignment 1](Assignments/Assignment1.html)  
 September 5  | [Rmarkdown](Lectures/Lesson3.html) | [Assignment 2](Assignments/Assignment2.html)  
-September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html), [dplyr and wrangling](Lectures/Lesson5.html) | [Assignment 3](Assignments/Assignment3.html) 
-September 19  | dplyr and wrangling| TBD  
+September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html), [Intro to R](Lectures/Lesson2a.html)| [Assignment 3](Assignments/Assignment3.html) 
+September 19  | [dplyr and wrangling](Lectures/Lesson5.html)| [Assignment 4](Assignments/Assignment4.html)  
 September 26  | ggplot2 | TBD  
 October 3  | ggplot2, Inkscape, Gimp | TBD  
 October 10  | TBD | TBD  
@@ -59,6 +61,7 @@ ___
 
 Name  | Github site | Portfolio website
 ------------- |----------- | -------------
+Matt Toomey|[Github](https://github.com/mbtoomey)|[Portfolio](https://mbtoomey.github.io/Biol_7263/)
 Elise Delaporte|[GitHub](https://github.com/elisead3)|[Portfolio](https://elisead3.github.io/DelaporteBIOL7263/)
 Emily Adamic|[Github](https://github.com/emadamic)|[Portfolio](https://emadamic.github.io/AdamicBIOL7263/)
 Madison Herrboldt|[Github](https://github.com/madisonherrboldt)|[Portfolio](https://madisonherrboldt.github.io/HerrboldtBIOL7263/)
@@ -68,8 +71,10 @@ Cari Lewis|[Github](https://github.com/Cari-D-Lewis)|[Portfolio](https://cari-d-
 Morgan Beeman|[Github](https://github.com/Nezara-viridula)|[Portfolio](https://nezara-viridula.github.io/BeemanBiol7262/)
 Olivia Pletcher|[Github](https://github.com/omp9336)|[Portfolio](https://omp9336.github.io/PletcherBIOL7263/)
 Amy West|[Github](https://github.com/Amycwest)|[Portfolio](https://amycwest.github.io/WestBIOL7263/)
-
-
+Caleb Paslay|[Github](https://github.com/CalebPaz28)|[Portfolio](https://calebpaz28.github.io/PaslayBIOL7263/)
+Laci Cartmell|[Github](https://github.com/laci-cartmell)|[Portfolio](https://laci-cartmell.github.io/CARTMELLBIOL7263.rmd/)
+Emily Bierbaum|[Github](https://github.com/EmilyBierbaum/)|[Portfolio](https://emilybierbaum.github.io/BierbaumBIOL7263/)
+Tanner Mierow|[Github](https://github.com/tanman6711/MierowBIOL7263)|[Portfolio](https://tanman6711.github.io/MierowBIOL7263/)
 
 
 

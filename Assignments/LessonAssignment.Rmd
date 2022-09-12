@@ -1,0 +1,36 @@
+---
+title: 'BIOL7263 - Lesson Presentation'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+Each student will develop a lesson and teach the class about an R package, specialized analysis, or data visualization approach that they have or will apply to their own research. Your lesson should include: 
+
+1. **An introductory lecture/walk through of the tool, analyses, or visualization.**  
+    - Aim for ~40 minute presentation to allow time for other lessons and for folks to work through exercises at the end of the session. 
+2. **Detailed lecture notes.**  
+   - written in Rmarkdown  
+   - posted to you Github webpage in html format. 
+3. **An exercise where folks can practice implementing the to tool, analyses, or visualization.**  
+   - written in Rmarkdown  
+   - posted to you Github webpage in html format. 
+   - Where appropriate provide a sample data set (ideally real data).  
+   - Provide assistance to students to help them complete the exercise 
+   
+**Please select your topic and confirm it with me <span style="text-decoration:underline">at least one month before</span> your scheduled presentation.** 
+   
+### Grading 
+
+Item |Points  
+:------------  |  :------------
+Lecture presentation | 40  
+Lecture notes  | 40  
+Exercise |20  
+ **Total**  | **100**
+
+
+For the current schedule of lesson presentations check the [Sign up sheet](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing).
