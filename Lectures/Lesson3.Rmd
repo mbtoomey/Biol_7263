@@ -8,6 +8,8 @@ output:
 
 ___
 
+You can review the markdown file for this lesson here: https://github.com/mbtoomey/Biol_7263/blob/main/Lectures/Lesson3.Rmd
+
 # Introduction
 
 Rmarkdown is a valuable tool to organize code, comments, and output for communication and archiving. I encourage you to use this format to work through our lessons and take notes. 
