@@ -529,8 +529,8 @@ RESULT:
 &gt;NM_001310345.1 Anas platyrhynchos growth hormone 1 (GH1), mRNA
 &gt;NM_001310346.1 Anas platyrhynchos ras homolog family member A (RHOA), mRNA</code></pre>
 </div>
-<div id="uisng-sed-to-clean-up-the-headers" class="section level3">
-<h3>Uisng <code>sed</code> to clean up the headers</h3>
+<div id="using-sed-to-clean-up-the-headers" class="section level3">
+<h3>Using <code>sed</code> to clean up the headers</h3>
 <p>#Here we can capture specific elements of the pattern with
 <code>\(</code> and <code>\)</code></p>
 <pre><code>sed &#39;s/\(\&gt;\w*\..\).*.(\(...*\)).*/\1 \2/&#39; Duck_headers.txt &gt; num_symbol.txt

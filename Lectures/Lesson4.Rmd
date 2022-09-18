@@ -166,7 +166,7 @@ RESULT:
 >NM_001310346.1 Anas platyrhynchos ras homolog family member A (RHOA), mRNA
 ```
 
-### Uisng `sed` to clean up the headers 
+### Using `sed` to clean up the headers 
 
 #Here we can capture specific elements of the pattern with `\(` and `\)`
 
