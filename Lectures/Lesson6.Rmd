@@ -151,7 +151,8 @@ family <- family %>% mutate_at(vars(starts_with("dob")), parse_date)
 5      5 2000-12-05 2005-02-28             2             1
 ```
 
-In this data set we have both `dob` and `gender` observations for child #1 and #2. We would like to tidy this, create a new variable `child` and have single `dob` and `gender` variables. Agian pivot gives us options to do this: 
+In this data set we have both `dob` and `gender` observations for child #1 and #2. We would like to tidy this, create a new variable `child` and have single `dob` and `gender` variables. Again, pivot gives us options to do this: 
+
 ```{r eval=FALSE}
 family %>% 
   pivot_longer(
@@ -162,6 +163,94 @@ family %>%
   )
 
 ```
+___
 
+### `pivot_wider()`
+
+In cases where you have observations spread across multiple rows, you can tidy these by widening the dataset with `pivot_wider()`
+
+The built in dataset called `table2` contains data on the population of a country and the number of cases of a disease observed, but the observations are collected in a single column `count` and labeled as population or cases by the the column `type`. 
+
+```{r warning=FALSE}
+require(tidyverse)
+table2
+```
+
+What we want are two new columns named population and cases that contain the values in the `count` column.  
+
+```{r eval=FALSE}
+table2 %>%
+    pivot_wider(names_from = type, values_from = count)
+```
+___
+
+### Separating one column to many
+
+Sometimes you will encounter data sets where a single column contains two or more values. These can be pulled apart with the `separate()` function. 
+
+For example, `table 3` is a version of `table 2` where the cases and population are expressed as `rate`.
+
+```{r}
+table3
+```
+
+We can create separate `cases` and `population` variables by splitting rate at the "/". 
+
+```{r eval=FALSE}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), sep = "/")
+```
+
+However, since `rate` was a character vector, the split columns are now character vectors which is not what we want. We can change them to integers by including the `convert = TRUE` option. 
+
+```{r eval=FALSE}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), convert = TRUE)
+```
+
+`convert` will apply the classification rules we discussed in the data import section of [Lesson 5](Lectures/Lesson5.html). 
+
+A common problem you might encounter is that someone has mixed data entries with sample notes in a single cell. `separate()` can help you here.
+
+Let's make a small example data set `field_notes` 
+
+```{r}
+field_notes<-tibble(
+  ID = c(023, 456, 167, 897), 
+  sex = c("F","F","M","F"),
+  mass = c("15.6 first sample of the day","16.0","17.2 caught with female 456","14.9 last sample of the day"))
+
+field_notes
+```
+
+Notice that mass also contains sample notes and everything is separated by a space. We would like separate coloumns for mass and notes. We can separate by space, but this does not do exactly what we would like. 
+
+```{r eval=FALSE}
+field_notes %>% 
+  separate(mass, 
+           into = c("mass","notes"), 
+           sep = " ")
+```
+
+It only recovers one of the words from the mote. `separate` has an option `extra` that allows you to merge the extra stuff into the second column: 
+
+```{r eval=FALSE}
+field_notes %>% 
+  separate(mass, 
+           = c("mass","notes"), 
+           sep = " ", 
+           extra = "merge")
+```
+
+This is almost what we want but the mass is still being treated as a string. We need to convert to have it treated as numeric (double). 
+
+```{r eval=FALSE}
+field_notes %>% 
+  separate(mass, 
+           into = c("mass","notes"), 
+           sep = " ", 
+           extra = "merge",
+           convert = TRUE)
+```
 
 

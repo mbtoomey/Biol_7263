@@ -45,3 +45,19 @@ family %>%
     names_sep = "_", #This tells pivot_longer() to split the column names at the "_". 
     values_drop_na = TRUE
   )
+
+table2 %>%
+  pivot_wider(names_from = type, values_from = count)
+
+
+field_notes<-tibble(
+  ID = c(023, 456, 167, 897), 
+  sex = c("F","F","M","F"),
+  mass = c("15.6 first sample of the day","16.0","17.2 caught with female 456","14.9 last sample of the day"))
+
+field_notes %>% separate(mass, into = c("mass","notes"), sep = "(^\\d+\\.\\d$).*)")
+
+field_notes %>% separate(mass, into = c("mass","notes"), sep = " ", extra = "merge", convert = TRUE)
+
+field_notes %>% 
+  separate(mass, into = c("mass","notes"), sep = " ")

@@ -11,7 +11,7 @@
 
 <meta name="author" content="M. Toomey" />
 
-<meta name="date" content="2022-09-18" />
+<meta name="date" content="2022-09-19" />
 
 <title>Tidy and Merge Data</title>
 
@@ -365,7 +365,7 @@ pre code {
 
 <h1 class="title toc-ignore">Tidy and Merge Data</h1>
 <h4 class="author">M. Toomey</h4>
-<h4 class="date">2022-09-18</h4>
+<h4 class="date">2022-09-19</h4>
 
 </div>
 
@@ -528,8 +528,8 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <p>In this data set we have both <code>dob</code> and
 <code>gender</code> observations for child #1 and #2. We would like to
 tidy this, create a new variable <code>child</code> and have single
-<code>dob</code> and <code>gender</code> variables. Agian pivot gives us
-options to do this:</p>
+<code>dob</code> and <code>gender</code> variables. Again, pivot gives
+us options to do this:</p>
 <pre class="r"><code>family %&gt;% 
   pivot_longer(
     col = !family, #pivot columns that are not family
@@ -537,6 +537,122 @@ options to do this:</p>
     names_sep = &quot;_&quot;, #This tells pivot_longer() to split the column names at the &quot;_&quot;. 
     values_drop_na = TRUE
   )</code></pre>
+<hr />
+</div>
+<div id="pivot_wider" class="section level3">
+<h3><code>pivot_wider()</code></h3>
+<p>In cases where you have observations spread across multiple rows, you
+can tidy these by widening the dataset with
+<code>pivot_wider()</code></p>
+<p>The built in dataset called <code>table2</code> contains data on the
+population of a country and the number of cases of a disease observed,
+but the observations are collected in a single column <code>count</code>
+and labeled as population or cases by the the column
+<code>type</code>.</p>
+<pre class="r"><code>require(tidyverse)</code></pre>
+<pre><code>## Loading required package: tidyverse</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.7     v dplyr   1.0.8
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>table2</code></pre>
+<pre><code>## # A tibble: 12 x 4
+##    country      year type            count
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
+##  1 Afghanistan  1999 cases             745
+##  2 Afghanistan  1999 population   19987071
+##  3 Afghanistan  2000 cases            2666
+##  4 Afghanistan  2000 population   20595360
+##  5 Brazil       1999 cases           37737
+##  6 Brazil       1999 population  172006362
+##  7 Brazil       2000 cases           80488
+##  8 Brazil       2000 population  174504898
+##  9 China        1999 cases          212258
+## 10 China        1999 population 1272915272
+## 11 China        2000 cases          213766
+## 12 China        2000 population 1280428583</code></pre>
+<p>What we want are two new columns named population and cases that
+contain the values in the <code>count</code> column.</p>
+<pre class="r"><code>table2 %&gt;%
+    pivot_wider(names_from = type, values_from = count)</code></pre>
+<hr />
+</div>
+<div id="separating-one-column-to-many" class="section level3">
+<h3>Separating one column to many</h3>
+<p>Sometimes you will encounter data sets where a single column contains
+two or more values. These can be pulled apart with the
+<code>separate()</code> function.</p>
+<p>For example, <code>table 3</code> is a version of
+<code>table 2</code> where the cases and population are expressed as
+<code>rate</code>.</p>
+<pre class="r"><code>table3</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country      year rate             
+## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583</code></pre>
+<p>We can create separate <code>cases</code> and <code>population</code>
+variables by splitting rate at the “/”.</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(rate, into = c(&quot;cases&quot;, &quot;population&quot;), sep = &quot;/&quot;)</code></pre>
+<p>However, since <code>rate</code> was a character vector, the split
+columns are now character vectors which is not what we want. We can
+change them to integers by including the <code>convert = TRUE</code>
+option.</p>
+<pre class="r"><code>table3 %&gt;% 
+  separate(rate, into = c(&quot;cases&quot;, &quot;population&quot;), convert = TRUE)</code></pre>
+<p><code>convert</code> will apply the classification rules we discussed
+in the data import section of <a href="Lectures/Lesson5.html">Lesson
+5</a>.</p>
+<p>A common problem you might encounter is that someone has mixed data
+entries with sample notes in a single cell. <code>separate()</code> can
+help you here.</p>
+<p>Let’s make a small example data set <code>field_notes</code></p>
+<pre class="r"><code>field_notes&lt;-tibble(
+  ID = c(023, 456, 167, 897), 
+  sex = c(&quot;F&quot;,&quot;F&quot;,&quot;M&quot;,&quot;F&quot;),
+  mass = c(&quot;15.6 first sample of the day&quot;,&quot;16.0&quot;,&quot;17.2 caught with female 456&quot;,&quot;14.9 last sample of the day&quot;))
+
+field_notes</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##      ID sex   mass                        
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                       
+## 1    23 F     15.6 first sample of the day
+## 2   456 F     16.0                        
+## 3   167 M     17.2 caught with female 456 
+## 4   897 F     14.9 last sample of the day</code></pre>
+<p>Notice that mass also contains sample notes and everything is
+separated by a space. We would like separate coloumns for mass and
+notes. We can separate by space, but this does not do exactly what we
+would like.</p>
+<pre class="r"><code>field_notes %&gt;% 
+  separate(mass, 
+           into = c(&quot;mass&quot;,&quot;notes&quot;), 
+           sep = &quot; &quot;)</code></pre>
+<p>It only recovers one of the words from the mote.
+<code>separate</code> has an option <code>extra</code> that allows you
+to merge the extra stuff into the second column:</p>
+<pre class="r"><code>field_notes %&gt;% 
+  separate(mass, 
+           = c(&quot;mass&quot;,&quot;notes&quot;), 
+           sep = &quot; &quot;, 
+           extra = &quot;merge&quot;)</code></pre>
+<p>This is almost what we want but the mass is still being treated as a
+string. We need to convert to have it treated as numeric (double).</p>
+<pre class="r"><code>field_notes %&gt;% 
+  separate(mass, 
+           into = c(&quot;mass&quot;,&quot;notes&quot;), 
+           sep = &quot; &quot;, 
+           extra = &quot;merge&quot;,
+           convert = TRUE)</code></pre>
 </div>
 
 
