@@ -32,8 +32,8 @@ August 22  | [Class organization and scheduling](https://forms.gle/CUaDDMa7enTy3
 August 29  | RStudio, [Git](Lectures/Lesson2.html) | [Assignment 1](Assignments/Assignment1.html)  
 September 5  | [Rmarkdown](Lectures/Lesson3.html) | [Assignment 2](Assignments/Assignment2.html)  
 September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html)| [Assignment 3](Assignments/Assignment3.html) 
-September 19  |  [Intro to R](Lectures/Lesson2a.html), [Data Import/Export with readr](Lectures/Lesson5b.html), [dplyr and wrangling](Lectures/Lesson5.html)| [Assignment 4](Assignments/Assignment4.html)  
-September 26  | Tidy and merge | TBD  
+September 19  |  [Intro to R](Lectures/Lesson2a.html), [Data import/export with readr](Lectures/Lesson5b.html), [dplyr and wrangling](Lectures/Lesson5.html)| --
+September 26  | Tidy and merge | [Assignment 4](Assignments/Assignment4.html) 
 October 3  | ggplot2 | TBD  
 October 10  | ggplot2, Inkscape, Gimp | TBD  
 October 17  | GIS in R | TBD  
