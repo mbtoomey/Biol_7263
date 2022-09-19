@@ -6,7 +6,7 @@
 ##
 ## Author: Matthew Toomey
 ##
-## Date Created: 2022-08-30
+## Date Created: `r Sys.Date()`
 ##
 ##
 ## ---------------------------
@@ -16,6 +16,6 @@
 ##
 ## ---------------------------
 
-## load up the packages we will need:  
+## load the packages needed:  
 
 require(tidyverse)
