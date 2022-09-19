@@ -19,6 +19,43 @@ R is an integrated suite of software facilities for data manipulation, calculati
 
 Here I will introduce a few fundamental concepts that underlie operations in R and how data is handled. 
 
+## R scripts and commenting
+
+Up to now we have primarily been working with R markdown (`.rmd` files) documents. These are great for communicating your finalized analyses and results, but not ideal for coding complex analyses. The primary way you will want to code is in an R script (`.R` file). Once you have finalized your R script, then you can use elements from the script to build your markdown file and present your analyses and results. 
+
+### Organizing your R script
+  
+  
+#### 1. Provide an informative header
+  
+  
+In commented text (starting with a #) provide:
+
+- Name of the script  
+- Purpose of the script 
+- Author  
+- Date initiated and dates that it has been updated  
+- Additional notes if applicable  
+
+I have setup a standardized header format for myself that is avaialable [here](https://github.com/mbtoomey/Biol_7263/blob/main/CourseMaterials/header.R)
+
+In R studio, I have set up this header as a code snippet that I can call up my entering `mbt_header`. More details about code snippets can be found [here](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets?version=2022.07.1%2B554&mode=desktop)
+
+I like generally structure my code:  
+1. Load required packages
+2. Load data files  
+3. Code analyses and plots
+
+### 2. Provide informative comments throughout 
+
+![](http://www.quickmeme.com/img/e0/e0f56e703b6ec14b1093a1d8c2fd5235aafc592f20ad80cf1fc23b56d66f061c.jpg)  
+
+Comments are essential for you to understand why you did what you did at some point in the remote future. 
+
+Each line of a comment should begin with the comment symbol and a single space: `# `. Comments should be in sentence case, and only end with a full stop if they contain at least two sentences. 
+
+## Some basic operations in R
+
 ### Assigning a variable
 
 ```{r, eval=FALSE}
