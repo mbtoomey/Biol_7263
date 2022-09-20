@@ -298,3 +298,4 @@ starwars_cut %>%
   filter (n() > 1) %>% #In one step this will calculate the group count and filter by that count
   summarize(mean_mass = mean(mass), SD_mass =sd(mass)) 
 ```
+

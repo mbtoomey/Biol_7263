@@ -46,7 +46,7 @@ I like generally structure my code:
 2. Load data files  
 3. Code analyses and plots
 
-### 2. Provide informative comments throughout 
+#### 2. Provide informative comments throughout 
 
 ![](http://www.quickmeme.com/img/e0/e0f56e703b6ec14b1093a1d8c2fd5235aafc592f20ad80cf1fc23b56d66f061c.jpg)  
 
