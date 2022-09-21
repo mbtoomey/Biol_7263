@@ -1,0 +1,25 @@
+---
+title: "Merging Data Sets"
+author: "M. Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document: 
+    highlight: tango
+    theme: united
+editor_options: 
+  chunk_output_type: console
+---
+
+In this lesson we will introduce tools that can help you merge multiple data sets accurately and efficiently. 
+
+### Mutating joins
+
+Mutating joins add new variables to a data set from matching observations in another data set.
+
+There are four different types of mutating joins:  
+- `inner_join(x,y)` - joins matching observations in both x and y 
+- Outer joins  
+  - `left_join(x,y)` - joins all observations in x and adds matching observations from y. By default will add NAs where observations from x have no match in y. 
+  - `right_join(x,y)`- joins all observations in y and adds matching observations in x. By default will add NAs where observations from y have no match in x.
+  - `full_join(x,y)` - joins all observations from x and all observvations from y. By default will add NAs where matching observations are missing in eaither x or y.
+

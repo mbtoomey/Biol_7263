@@ -1,5 +1,5 @@
 ---
-title: "Tidy and Merge Data"
+title: "Tidying Data"
 author: "M. Toomey"
 date: "`r Sys.Date()`"
 output: 
@@ -10,7 +10,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-Up to now we have been working with single datasets that are "tidy" and organized in a way that make them easy to work with in `R` and the `tidyverse` family of packages. In this lesson we will introduce tools that can help you 1) transform "messy" data into tidy data and 2) merge multiple datasets accurately and efficiently. 
+Up to now we have been working with single datasets that are "tidy" and organized in a way that make them easy to work with in `R` and the `tidyverse` family of packages. In this lesson we will introduce tools that can help you transform "messy" data into tidy data.  
 
 ### The three rules of tidy data  
 
@@ -245,12 +245,32 @@ field_notes %>%
 This is almost what we want but the mass is still being treated as a string. We need to convert to have it treated as numeric (double). 
 
 ```{r eval=FALSE}
-field_notes %>% 
+field_notes_sep<-field_notes %>% 
   separate(mass, 
            into = c("mass","notes"), 
            sep = " ", 
-           extra = "merge",
+           extra = "merge", 
            convert = TRUE)
+
+field_notes_sep
+```
+___
+### Merging  columns with `unite()`
+
+`unite()` is the inverse of `separate()` and brings many columns togerther into one. 
+
+```{r eval=FALSE}
+field_notes_sep %>% 
+  unite(col = ID_sex, ID, sex)
 ```
 
+By default `unite()` joins the values in the columns with an `"_"` and deletes the joined columns. However, we can control this behavior by changing the options. 
+
+```{r eval=FALSE}
+field_notes_sep %>% 
+  unite(col = ID_sex, ID, sex,
+    sep = "&",  #this specifies a "&" as the separator
+    remove = FALSE)  #this will retain the joined columns in the result
+```
+___
 

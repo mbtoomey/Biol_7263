@@ -11,9 +11,9 @@
 
 <meta name="author" content="M. Toomey" />
 
-<meta name="date" content="2022-09-19" />
+<meta name="date" content="2022-09-20" />
 
-<title>Tidy and Merge Data</title>
+<title>Tidying Data</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -363,9 +363,9 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Tidy and Merge Data</h1>
+<h1 class="title toc-ignore">Tidying Data</h1>
 <h4 class="author">M. Toomey</h4>
-<h4 class="date">2022-09-19</h4>
+<h4 class="date">2022-09-20</h4>
 
 </div>
 
@@ -373,9 +373,8 @@ pre code {
 <p>Up to now we have been working with single datasets that are “tidy”
 and organized in a way that make them easy to work with in
 <code>R</code> and the <code>tidyverse</code> family of packages. In
-this lesson we will introduce tools that can help you 1) transform
-“messy” data into tidy data and 2) merge multiple datasets accurately
-and efficiently.</p>
+this lesson we will introduce tools that can help you transform “messy”
+data into tidy data.</p>
 <div id="the-three-rules-of-tidy-data" class="section level3">
 <h3>The three rules of tidy data</h3>
 <ol style="list-style-type: decimal">
@@ -647,12 +646,30 @@ to merge the extra stuff into the second column:</p>
            extra = &quot;merge&quot;)</code></pre>
 <p>This is almost what we want but the mass is still being treated as a
 string. We need to convert to have it treated as numeric (double).</p>
-<pre class="r"><code>field_notes %&gt;% 
+<pre class="r"><code>field_notes_sep&lt;-field_notes %&gt;% 
   separate(mass, 
            into = c(&quot;mass&quot;,&quot;notes&quot;), 
            sep = &quot; &quot;, 
-           extra = &quot;merge&quot;,
-           convert = TRUE)</code></pre>
+           extra = &quot;merge&quot;, 
+           convert = TRUE)
+
+field_notes_sep</code></pre>
+<hr />
+</div>
+<div id="merging-columns-with-unite" class="section level3">
+<h3>Merging columns with <code>unite()</code></h3>
+<p><code>unite()</code> is the inverse of <code>separate()</code> and
+brings many columns togerther into one.</p>
+<pre class="r"><code>field_notes_sep %&gt;% 
+  unite(col = ID_sex, ID, sex)</code></pre>
+<p>By default <code>unite()</code> joins the values in the columns with
+an <code>&quot;_&quot;</code> and deletes the joined columns. However, we can
+control this behavior by changing the options.</p>
+<pre class="r"><code>field_notes_sep %&gt;% 
+  unite(col = ID_sex, ID, sex,
+    sep = &quot;&amp;&quot;,  #this specifies a &quot;&amp;&quot; as the separator
+    remove = FALSE)  #this will retain the joined columns in the result</code></pre>
+<hr />
 </div>
 
 

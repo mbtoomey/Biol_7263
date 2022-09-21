@@ -55,9 +55,20 @@ field_notes<-tibble(
   sex = c("F","F","M","F"),
   mass = c("15.6 first sample of the day","16.0","17.2 caught with female 456","14.9 last sample of the day"))
 
-field_notes %>% separate(mass, into = c("mass","notes"), sep = "(^\\d+\\.\\d$).*)")
 
-field_notes %>% separate(mass, into = c("mass","notes"), sep = " ", extra = "merge", convert = TRUE)
+field_notes_sep<-field_notes %>% separate(mass, into = c("mass","notes"), sep = " ", extra = "merge", convert = TRUE)
 
 field_notes %>% 
   separate(mass, into = c("mass","notes"), sep = " ")
+
+field_notes_sep %>% 
+  unite(col = ID_sex, ID, sex)
+
+field_notes_sep %>% 
+  unite(col = ID_sex, ID, sex,
+        sep = "&",  #this specifies a "&" as the separator
+        remove = FALSE)  #this will retain the joined columns in the result
+
+band_members
+band_instruments
+band_instruments2
