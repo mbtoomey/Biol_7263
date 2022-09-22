@@ -72,3 +72,13 @@ field_notes_sep %>%
 band_members
 band_instruments
 band_instruments2
+
+Assignment5:
+
+exp1<-read_csv("Data/assignment6part1.csv")
+
+#pivotting needs to happen in two steps
+
+pivot_longer(exp1, cols = !ID, names_to = "sample_sex_treatment") %>%
+  pivot_wider(names_from = ID, values_from = value)
+
