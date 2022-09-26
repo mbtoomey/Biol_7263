@@ -13,7 +13,7 @@
 
 <meta name="date" content="2022-09-26" />
 
-<title>BIOL7263 - Assignment #4</title>
+<title>BIOL7263 - Assignment #5</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -363,7 +363,7 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">BIOL7263 - Assignment #4</h1>
+<h1 class="title toc-ignore">BIOL7263 - Assignment #5</h1>
 <h4 class="author">Matthew Toomey</h4>
 <h4 class="date">2022-09-26</h4>
 
@@ -371,31 +371,26 @@ pre code {
 
 
 <hr />
-<div id="dplyr-exercises" class="section level2">
-<h2><code>dplyr</code> exercises</h2>
-<p>For these exercise download and import the data files containing my
-Ebird observations from here: <a href="https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true" class="uri">https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true</a></p>
-<p>Using the functions in <code>dplyr</code> and base <code>R</code>
-answer the following questions. Create an R markdown file that documents
-the answer and the code you used to answer the question. In the markdown
-also include a link to the commented R script where all of the code can
-be run to reproduce your answers. Knit this to an html file and link on
-your portfolio page.</p>
+<div id="tidyr-and-merge-exercise" class="section level2">
+<h2><code>tidyr</code> and merge exercise</h2>
+<p>For these exercise download and import these two csv files:</p>
+<ul>
+<li><p><a href="https://github.com/mbtoomey/Biol_7263/blob/main/Data/assignment6part1.csv">Part1</a></p></li>
+<li><p><a href="https://github.com/mbtoomey/Biol_7263/blob/main/Data/assignment6part2.csv">Part2</a></p></li>
+</ul>
 <ol style="list-style-type: decimal">
-<li><p>In which year did I observe the most individual birds? How
-many?</p></li>
-<li><p>In that year how many different species of birds did I
-observe?</p></li>
-<li><p>In which state did I most frequently observe Red-winged
-Blackbirds?</p></li>
-<li><p>Filter observations for a duration between 5 and 200 minutes.
-Calculate the mean rate per checklist that I encounter species each
-year. Specifically, calculate the number of species in each checklist
-divided by time and then take the mean for the year.</p></li>
-<li><p>Create a data frame that includes the complete observations for
-the top 10 most frequently observed species. First generate a top 10
-list and then use this list to filter all observations.</p></li>
+<li><p>Pivot and merge these two data sets into a single tidy tibble.
+Export this tibble as a <code>.csv</code> file saved to a folder called
+“Data” folder within your R project.</p></li>
+<li><p>With this tidy tibble, generate a new tibble of the mean +/-
+standard deviation of the residual mass (mass/body length) by treatment
+and sex. Export this tibble as a <code>.csv</code> file saved to a
+folder called “Data” folder within your R project.</p></li>
 </ol>
+<p>In an Rmarkdown document present the code you used to pivot, merge,
+etc. and the links to the commented R script and final <code>.csv</code>
+files stored in your Data folder. Knit this to an html file and link on
+your portfolio page.</p>
 </div>
 
 

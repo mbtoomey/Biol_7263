@@ -12,7 +12,7 @@ ___
 
 For these exercise download and import the data files containing my Ebird observations from here: https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true
 
-Using the functions in `dplyr` and base `R` answer the following questions. Create a mark down files that documents the answer and the code you used to answer the question. Also include a link the a commented R script where all of the code can be run to reproduce your answers
+Using the functions in `dplyr` and base `R` answer the following questions. Create an R markdown file that documents the answer and the code you used to answer the question. In the markdown also include a link to the commented R script where all of the code can be run to reproduce your answers. Knit this to an html file and link on your portfolio page. 
 
 1. In which year did I observe the most individual birds? How many?
 
