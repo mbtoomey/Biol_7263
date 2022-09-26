@@ -20,9 +20,9 @@ Using the functions in `dplyr` and base `R` answer the following questions. Crea
 
 3. In which state did I most frequently observe Red-winged Blackbirds? 
 
-4. Filter observations for a duration between 5 and 200 minutes. Calculate the mean rate per checklist that I encounter species each year. Specifically, calculate the number of species in each checklist divided by time and then take the mean for the year. 
+4. Filter observations for a duration between 5 and 200 minutes. Calculate the mean rate per checklist that I encounter species each year. Specifically, calculate the number of species in each checklist divided by duration and then take the mean for the year. 
 
-5. Create a data frame that includes the complete observations for the top 10 most frequently observed species. First generate a top 10 list and then use this list to filter all observations. 
+5. Create a tibble that includes the complete observations for the top 10 most frequently observed species. First generate a top 10 list and then use this list to filter all observations. Export this tibble as a `.csv` file saved to a folder called "Results" folder within your R project and add link to the markdown document.
 
 
   
