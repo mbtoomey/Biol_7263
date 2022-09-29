@@ -16,11 +16,11 @@ For these exercise download and import these two csv files:
 
 - [Part2](https://github.com/mbtoomey/Biol_7263/blob/main/Data/assignment6part2.csv)
 
-1. Pivot and merge these two data sets into a single tidy tibble. Export this tibble as a `.csv` file saved to a folder called "Results" folder within your R project. 
+1. Pivot and merge these two data sets into a single tidy tibble. Export this tibble as a `.csv` file saved to a folder called "Data" folder within your R project. 
 
-2. With this tidy tibble, generate a new tibble of the mean +/- standard deviation of the residual mass (mass/body length) by treatment and sex. Export this tibble as a `.csv` file saved to a folder called "Results" folder within your R project. 
+2. With this tidy tibble, generate a new tibble of the mean +/- standard deviation of the residual mass (mass/body length) by treatment and sex. Export this tibble as a `.csv` file saved to a folder called "Data" folder within your R project. 
 
-In an Rmarkdown document present the code you used to pivot, merge, etc. and the links to the commented R script and final `.csv` files stored in your Data folder. Knit this to an html file and link on your portfolio page.   
+In an Rmarkdown document present the code you used to pivot, merge, etc. and the links to the final `.csv`  
 
 
   

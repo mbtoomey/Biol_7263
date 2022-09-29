@@ -52,7 +52,7 @@ To make this tidy data we need to convert to three columns:
 - `income` 
 - `count` 
 
-We want to *long* dataset with many rows that are each a unique observation. To do this we can `pivot_long`
+We want a *long* dataset with many rows that are each a unique observation. To do this we can `pivot_long`
 
 ```{r eval=FALSE}
 relig_income %>% 
@@ -110,12 +110,12 @@ billboard %>%
 
 In the `who` data set the column names contain three variables:   
 
-- A prefix that indicates these are new cases `new/new_`. This is the same for all observations and can de dropped.  
+- A prefix that indicates these are new cases `new/new_`. This is the same for all observations and can be dropped.  
 - A diagnosis method: `sp/rel/ep` 
 - Gender `m/f`  
 - Age range: `014/1524/2535/3544/4554/65` 
 
-We can use regular expression within the pivit function to parse these into separate variables: 
+We can use regular expression within the pivot function to parse these into separate variables: 
 
 ```{r eval=FALSE}
 who %>% pivot_longer(

@@ -1,5 +1,5 @@
 ---
-title: "Merging Data Sets"
+title: "Merging and Comparing Data Sets"
 author: "M. Toomey"
 date: "`r Sys.Date()`"
 output: 
@@ -10,11 +10,11 @@ editor_options:
   chunk_output_type: console
 ---
 
-In this lesson we will introduce tools that can help you merge multiple data sets accurately and efficiently. 
+These tools are designed to help you merge and compare multiple data sets accurately and efficiently. 
 
 ### Mutating joins
 
-Mutating joins add new variables to a data set from matching observations in another data set.
+Mutating joins add new variables to a data set from another data set that match observations in in a **key** variable in each data set.
 
 There are four different types of mutating joins:  
 
@@ -28,9 +28,60 @@ There are four different types of mutating joins:
 
 Examples from the [vignette](https://dplyr.tidyverse.org/reference/mutate-joins.html)
 
-We have two data sets `band_members` and `band_instruments` that share a "name key
+We have two data sets `band_members` and `band_instruments` that share a key "name"
+
+```{r message=FALSE}
+require(tidyverse)
+band_members
+band_instruments
+```
+
+Try each type mutating join function following this general template: 
+
+```{r eval=FALSE}
+band_members %>%
+  <some join function> (band_instruments, by = "name")
+```
+
+The joining variable name of the keys does not necessarily need to be the same, but that values must match.
+
+```{r}
+band_instruments2 # in this data set the key variable is called artist
+```
+
+We can join this by specifying the keys in the `by` option
+
+```{r eval=FALSE}
+band_members %>% 
+  full_join(band_instruments2, by = c("name" = "artist"))
+```
+
+If you want to retain the "artist" variable you can specify `keep=TRUE`
 
 
+```{r eval=FALSE}
+band_members %>% 
+  full_join(band_instruments2, by = c("name" = "artist"), keep=TRUE)
+```
 
+### Filtering joins
 
+Filtering joins allow you to filter one date set based on the presence or absence of matches in a second data set. This is a great way to investigate large data sets for missing observations. 
 
+- `semi_join(x,y)` returns all rows from x with a match in y.
+- `anti_join(x,y)` returns all rows from x without a match in y.
+
+Try each on the band data set: 
+
+```{r eval=FALSE}
+band_members %>%
+  <some filter join function> (band_instruments, by = "name")
+```
+
+### Set operations
+
+These are similar to filter joins but work on **complete rows** comparing the value of every variable. This can be helpful if you have multiple copies of a data set and want to find where there are similarities and differences between them. 
+
+- `intersect(x, y)` - return only observations in both x and y.
+- `union(x, y)` - return unique observations in x and y.
+- `setdiff(x, y)` - return observations in x, but not in y.

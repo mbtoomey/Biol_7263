@@ -11,7 +11,7 @@
 
 <meta name="author" content="M. Toomey" />
 
-<meta name="date" content="2022-09-20" />
+<meta name="date" content="2022-09-29" />
 
 <title>Tidying Data</title>
 
@@ -365,7 +365,7 @@ pre code {
 
 <h1 class="title toc-ignore">Tidying Data</h1>
 <h4 class="author">M. Toomey</h4>
-<h4 class="date">2022-09-20</h4>
+<h4 class="date">2022-09-29</h4>
 
 </div>
 
@@ -425,8 +425,8 @@ headers</li>
 <li><code>income</code></li>
 <li><code>count</code></li>
 </ul>
-<p>We want to <em>long</em> dataset with many rows that are each a
-unique observation. To do this we can <code>pivot_long</code></p>
+<p>We want a <em>long</em> dataset with many rows that are each a unique
+observation. To do this we can <code>pivot_long</code></p>
 <pre class="r"><code>relig_income %&gt;% 
   pivot_longer(cols = c(&quot;&lt;$10k&quot;, &quot;$10-20k&quot;, &quot;$20-30k&quot;, &quot;$30-40k&quot;, &quot;$40-50k&quot;, &quot;$50-75k&quot;, &quot;$75-100k&quot;, &quot;$100-150k&quot;, &quot;&gt;150k&quot;, &quot;Don&#39;t know/refused&quot;), names_to = &quot;income&quot;, values_to = &quot;count&quot;)
 
@@ -486,14 +486,14 @@ we want.</p>
 variables:</p>
 <ul>
 <li>A prefix that indicates these are new cases <code>new/new_</code>.
-This is the same for all observations and can de dropped.<br />
+This is the same for all observations and can be dropped.<br />
 </li>
 <li>A diagnosis method: <code>sp/rel/ep</code></li>
 <li>Gender <code>m/f</code><br />
 </li>
 <li>Age range: <code>014/1524/2535/3544/4554/65</code></li>
 </ul>
-<p>We can use regular expression within the pivit function to parse
+<p>We can use regular expression within the pivot function to parse
 these into separate variables:</p>
 <pre class="r"><code>who %&gt;% pivot_longer(
   cols = new_sp_m014:newrel_f65, #specify the range of columns to pivot
@@ -550,16 +550,16 @@ and labeled as population or cases by the the column
 <code>type</code>.</p>
 <pre class="r"><code>require(tidyverse)</code></pre>
 <pre><code>## Loading required package: tidyverse</code></pre>
-<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
-<pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
-## v tibble  3.1.7     v dplyr   1.0.8
-## v tidyr   1.2.0     v stringr 1.4.0
-## v readr   2.1.2     v forcats 0.5.1</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.2      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>table2</code></pre>
-<pre><code>## # A tibble: 12 x 4
+<pre><code>## # A tibble: 12 × 4
 ##    country      year type            count
 ##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
 ##  1 Afghanistan  1999 cases             745
@@ -589,7 +589,7 @@ two or more values. These can be pulled apart with the
 <code>table 2</code> where the cases and population are expressed as
 <code>rate</code>.</p>
 <pre class="r"><code>table3</code></pre>
-<pre><code>## # A tibble: 6 x 3
+<pre><code>## # A tibble: 6 × 3
 ##   country      year rate             
 ## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
 ## 1 Afghanistan  1999 745/19987071     
@@ -621,7 +621,7 @@ help you here.</p>
   mass = c(&quot;15.6 first sample of the day&quot;,&quot;16.0&quot;,&quot;17.2 caught with female 456&quot;,&quot;14.9 last sample of the day&quot;))
 
 field_notes</code></pre>
-<pre><code>## # A tibble: 4 x 3
+<pre><code>## # A tibble: 4 × 3
 ##      ID sex   mass                        
 ##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                       
 ## 1    23 F     15.6 first sample of the day
