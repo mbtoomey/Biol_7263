@@ -1,0 +1,150 @@
+---
+title: "ggplot aesthetics"
+author: "M. Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document: 
+    highlight: tango
+    theme: united
+editor_options: 
+  chunk_output_type: console
+---
+
+In addition to mapping data points to Cartesian coordinates in various geometries, `ggplot` allows you to map both continuous and discrete variables to the aesthetic of the geometric objects including: color, shape, and size. Therefore, you can represent the intersection of many different variables in a single plot.  
+
+### Basic mapping of aesthetic variables
+
+#### Packages
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+```
+
+Here we will specify the mappings within the `aes()` function and they will be applied to all of the geoms that follow it. 
+
+```{r}
+# mapping of a discrete variable to point color
+p1 <- ggplot(data=mpg) +                                   
+      aes(x=hwy,y=cty,color=class) + 
+      geom_point(size=3) 
+p1
+             
+# mapping of a discrete variable to point shape (<= 6)
+p1 <- ggplot(data=mpg) +
+      aes(x=hwy,y=cty,shape=class) + 
+      geom_point(size=3) 
+p1
+
+# mapping of a discrete variable to point size (not advised)
+p1 <- ggplot(data=mpg) +                                   
+      aes(x=hwy,y=cty,size=class) + 
+      geom_point() 
+p1
+
+# mapping a continuous variable to point size 
+p1 <- ggplot(data=mpg) + 
+      aes(x=hwy,y=cty,size=displ) + 
+      geom_point() 
+p1
+
+# mapping a continuous variable to point color
+p1 <- ggplot(data=mpg) + 
+      aes(x=hwy,y=cty,color=displ) + 
+      geom_point(size=5) 
+p1
+
+# mapping two variables to different aesthetics
+p1 <- ggplot(data=mpg) +                                   
+      aes(x=hwy,y=cty,shape=class,color=displ) + 
+      geom_point(size=5) 
+p1
+
+# use shape for smaller number of categories
+p1 <- ggplot(data=mpg) +                                  
+      aes(x=hwy,y=cty,shape=drv,color=fl) + 
+      geom_point(size=5) 
+
+# use all 3 (size, shape, color) to indicate 5 attributes!
+p1 <- ggplot(data=mpg) +                                   
+      aes(x=hwy,
+          y=cty,shape=drv,
+          color=fl,
+          size=displ) + 
+      geom_point()
+p1
+
+# mapping a variable to the same aesthetic in two different geoms
+p1 <- ggplot(data=mpg) + 
+            aes(x=hwy,y=cty,color=drv) + 
+            geom_point(size=2) +                                 
+            geom_smooth(method="lm")
+p1
+
+# break out the drive types (note what fill affects)
+p1 <- ggplot(data=mpg) + 
+            aes(x=hwy,y=cty, fill=drv) +
+            geom_point(size=2) +                                 
+            geom_smooth(method="lm")
+p1
+
+
+# use both if you want points, lines, and confidence intervals colored
+p1 <- ggplot(data=mpg) + 
+            aes(x=hwy,y=cty, color=drv, fill=drv) +
+            geom_point(size=2) +                                 
+            geom_smooth(method="lm")
+p1
+
+# group allows for grouping by a variable without specify a color, size, shape. Here the grouping only affects how the fit line is plotted
+p1 <- ggplot(data=mpg) +
+          aes(x=hwy,y=cty, group=drv) +
+          geom_point(size=2) +                                 
+          geom_smooth(method="lm")
+p1
+
+
+```
+
+#### Mapping aesthetics within geoms
+
+When plotting multiple geoms you may want to map the aesthetics differently within these. This can be done by specify the mapping with the geom function. 
+
+```{r, warning=FALSE, message=FALSE}
+
+# now use aesthetic mappings within each geom to over-ride defaults
+# subset the data frame to pull out what you need
+
+p1 <- ggplot(data=mpg) + 
+      aes(x=hwy,y=cty,col=drv) +
+      geom_point(data=mpg[mpg$drv=="4",]) + 
+      geom_smooth()
+p1
+
+# instead of subsetting, just map an aesthetic
+p1 <- ggplot(data=mpg) + 
+      aes(x=hwy,y=cty) +
+      geom_point(aes(color=drv)) + 
+      geom_smooth()
+p1
+
+# Conversely, map the smoother, but not the points
+p1 <- ggplot(data=mpg) + 
+      aes(x=hwy,y=cty) +
+      geom_point() + 
+      geom_smooth(aes(color=drv))
+p1
+
+# also, subset in the first layer to eliminate some data entirely
+# instead of subsetting, just map an aesthetic
+p1 <- ggplot(data=mpg[mpg$drv!="4",]) + 
+      aes(x=hwy,y=cty) +
+      geom_point(aes(color=drv)) + 
+      geom_smooth()
+p1
+
+```
+
+```
+Lesson developed with materials adapted from: https://gotellilab.github.io/Bio381/
+```

@@ -34,7 +34,7 @@ September 5  | [Rmarkdown](Lectures/Lesson3.html) | [Assignment 2](Assignments/A
 September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html)| [Assignment 3](Assignments/Assignment3.html) 
 September 19  |  [Intro to R](Lectures/Lesson2a.html), [Data import/export with readr](Lectures/Lesson5b.html), [dplyr and wrangling](Lectures/Lesson5.html)| --
 September 26  | [Tidy](Lectures/Lesson6.html), [Merge and Compare](Lectures/Lesson6b.html) | [Assignment 4](Assignments/Assignment4.html), [Assignment 5](Assignments/Assignment5.html)
-October 3  | ggplot2 | TBD  
+October 3  | [Intro to ggplot](Lectures/Lesson7.html), [ggplot aesthetics](Lectures/Lesson7b.html), [facet and patchwork]([ggplot aesthetics](Lectures/Lesson7c.html)) | TBD  
 October 10  | ggplot2, Inkscape, Gimp | TBD  
 October 17  | GIS in R | TBD  
 October 24  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -
