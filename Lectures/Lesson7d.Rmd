@@ -1,0 +1,171 @@
+---
+title: "Beyond Bar Graphs"
+author: "M. Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document: 
+    highlight: tango
+    theme: united
+editor_options: 
+  chunk_output_type: console
+---
+
+For a detailed discussion of the issues in this lesson please read: 
+
+[Weissgerber, T. L., N. M. Milic, S. J. Winham, and V. D. Garovic (2015). Beyond bar and line graphs: time for a new data presentation paradigm. PLoS biology 13:e1002128.](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128)
+
+___
+
+Comparing the values of measures among treatment groups is a common approach to hypothesis testing in biology. However, the reliability of these comparisons depends on the sample size and distribution of the data. One of the most common ways to plot such comparisons is bar plot of the group means with standard error: 
+
+```{r }
+require(tidyverse)
+
+# order factor levels in the full dataset
+mpg_fact<-mpg %>% 
+  mutate(class = factor(class, levels = c("2seater","subcompact","compact","midsize","minivan","pickup","suv")))
+
+
+# plot a bar plot of the means with standard error
+p1<-ggplot(mpg_fact, aes(class, hwy)) +
+  stat_summary(fun = mean, 
+               geom = "col", 
+               width = 0.5, 
+               color = "red", fill = "white") +
+  stat_summary(geom = "errorbar", 
+               width = 0.3) + # by default the standard error will be calculated from the "errorbar" geom
+  ylim(0,45) + 
+  coord_flip()
+p1
+```
+
+Plots of these types are essentially "visual tables" of summary statisitics and do not inform the reader about the distribution of the data or sample size. 
+
+Here we will explore a variety of alternatives that offer the reader better opportunities to assess the data and consider the conclusion drawn from it. 
+
+### Boxplots
+
+As we have discussed previously in the [Intro to ggplot](Lectures/Lesson7.html), boxplots offer information about the distribution of the data. 
+
+```{r}
+p2<-ggplot(mpg_fact, aes(class, hwy)) +
+  geom_boxplot(color = "red") + 
+  ylim(0,45) + 
+  coord_flip()
+p2
+```
+
+However, they do not provide information about sample size and the interpretation of distribution of data is not intuitive. For example:
+
+![](https://i0.wp.com/nightingaledvs.com/wp-content/uploads/2021/11/box-plot-vs-histogram-w-callouts.png?resize=1920%2C1010&ssl=1){width=50%}
+
+```
+from: https://nightingaledvs.com/ive-stopped-using-box-plots-should-you/
+```
+
+### Violin plots
+
+Violin plots present symmetrical smoothed density profiles that reveal more of the variation in the frequency of values. 
+
+```{r}
+p3<-ggplot(mpg_fact, aes(class, hwy)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))+ #added the draw_quantiles option to show the 25th, 50th, and 75th quantile of the data
+  stat_summary(fun = mean, 
+               geom = "crossbar",
+               width = 0.4, color = "red") + #calculated the mean for each group and plotted a crossbar. 
+  ylim(0,45) +
+  coord_flip()
+p3
+
+```
+
+These violin plots give more information about the the distribution of the data, but sample size still remains obscure. 
+
+### Univariate scatter plots
+
+Why hide behind summary statistics when you can simply show the complete data. Dot plots allow for the easy plotting of continuous data among categorical groupings. 
+
+```{r}
+p4<-ggplot(mpg_fact, aes(class, hwy)) +
+  geom_jitter(width = 0.3, 
+              alpha = 0.4, size = 1.6)+ # adding transparency with the alpha option makes overlaps easier to discern
+  stat_summary(fun = mean, geom = "crossbar",
+               width = 0.5, color = "red") + #plot a crossbar with the mean values
+  stat_summary(geom = "errorbar", 
+               width = 0.3,
+               color = "red") + #plot standard error of the means
+  ylim(0,45) + 
+  coord_flip()
+p4
+```
+
+This allows us to visualize all of the data and the mean in the same plot.
+
+Let's compare all four approaches: 
+
+```{r}
+require(patchwork)
+(p1 + p2) / (p3 + p4) 
+```
+
+Which do you think conveys the most useful information? 
+
+### Combining multiple plot elements 
+
+These various elements communicate different aspects of the distribution of the data. Therefore, it can sometimes be effective to combine elements in a single plot.  
+
+```{r}
+p5<-ggplot(mpg_fact, aes(class, hwy)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), 
+              position = position_nudge (x = 0.5, y = 0), 
+              width = 0.4)+
+  geom_jitter(width = 0.2, 
+              alpha = 0.4, size = 1.6)+
+  stat_summary(fun = mean, geom = "crossbar", 
+               width = 0.4, color = "red") +
+  ylim(0,45) + 
+  coord_flip()
+p5
+```
+
+### Paired/Repeated Observations
+
+When the observations across the levels of a factor are linked (e.g. repeated measures of the same individual over time) it is essential to show the data points at each level. Summary statics like group means will not capture the patterns of change at the individual level. 
+
+```{r}
+# Let's generate some paired observations
+ID<-c("A","B","C","D","E","F","G","A","B","C","D","E","F","G")
+Obs<-c("before","before","before","before","before","before","before","after","after","after","after","after","after","after")
+Measure<-c(runif(1:7),runif(1:7)*4)
+
+RepEx<-tibble(ID,Obs,Measure) #make these observations into a tibble
+
+RepEx<-RepEx %>% 
+  mutate(Obs = factor(Obs, levels = c("before","after"))) #order the levels of observation as a factor
+
+# build a point and line plot
+p6<-ggplot(RepEx, aes(Obs, Measure))+
+  geom_point(alpha = 0.4, 
+             size = 4, 
+             aes(color = ID))+
+  geom_line(size = 2, 
+            alpha = 0.4, 
+            aes(color = ID,  group = ID)) #group the line aesthetic to connect before and after observations by ID
+p6
+```
+
+Compare this to a simple plot of the means
+
+```{r}
+p7<-ggplot(RepEx, aes(Obs, Measure))+
+  stat_summary(fun = mean, 
+               geom = "col", 
+               width = 0.5, 
+               fill = "white") +
+  stat_summary(geom = "errorbar", 
+               width = 0.3) 
+p7
+```
+
+
+

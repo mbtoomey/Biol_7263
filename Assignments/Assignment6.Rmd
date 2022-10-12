@@ -1,0 +1,33 @@
+---
+title: 'BIOL7263 - Assignment #6'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+## `ggplot` exercises
+
+1. Using my ebird dataset (https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_ebird.csv?raw=true)  
+    + First calculate the total number of species seen each month of each year in each location 
+    + Then plot the number of species seen each month with the color of the points indicating year and facet this plot by location 
+
+Using the dataset from [Assignment #5](Assignment5.html): 
+
+2. Plot a comparison of mass by treatment including the individual observations, the mean, and standard error of the mean. Use point color or shape to indicate the sex.
+
+3. Generate a scatter plot of  age and mass, indicate treatment with point shape or color, and fit separate regression lines (without CI) to each treatment.
+
+4. Combine the plots from 2 and 3 using `patchwork` tag each panel with and number or letter and include a title for the overall plot. 
+
+In an Rmarkdown document present your code with the figures generated inline and add a link to this document on your portfolio page.    
+
+
+  
+  
+    
+
+
+ 
