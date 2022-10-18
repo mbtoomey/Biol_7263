@@ -1,0 +1,417 @@
+---
+title: "GIS in R - Rasters and Points"
+author: "M. Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document: 
+    highlight: tango
+    theme: united
+editor_options: 
+  chunk_output_type: console
+---
+
+A wide range of tools are available in `R` to work geographic information system (GIS) data. In this lesson we will  
+
+1) learn how to import, plot, and modify: 
+
+  - Raster files - pixelated or gridded data where each cell is a value at some point on the earths surface.
+  - Shapefiles - vectors of features, points, lines, polygons with specific attributes.  
+
+2) We will use publicly available data to model our own personal climate envelope.Essentially, we will pretend we are each a species and create our own personal "species" distribution model. 
+
+This will involve:
+  
+1) Loading climate rasters.  
+2) Selecting points from places you've lived and/or traveled to.   
+3) Extracting climate data from these points.  
+4) Stacking the relevant climate rasters
+5) Training  a “species” distribution model.  
+6) Plotting your climate envelope.    
+7) Comparing your envelope to global climates.
+
+### Preliminaries 
+
+For this exercise we will need to install and load the following packages: 
+
+```{r}
+# install.packages(c("sp","rgdal","raster","rgeos","geosphere","dismo"))
+```
+
+
+```{r}
+library(sp) # classes for vector data (polygons, points, lines)
+library(rgdal) # basic operations for spatial data
+library(raster) # handles rasters
+library(rgeos) # methods for vector files
+library(geosphere) # more methods for vector files
+library(dismo) # species distribution modeling tools
+```
+
+### Prepare your project folder
+
+GIS projects often involve several different classes of data and multiple files in a single analysis. To avoid confusion, let's create a working folder `GIS_lesson` with four subfolders:
+
+- `My_Climate_Sapce`
+- `My_loacations`
+- `WORLDCLIM_Rasters`
+- `Country_Shapefiles`
+
+You can simply do this in the file browser on your computer. 
+
+### Load Climate Data Rasters
+
+We will use data available from [worldclim.org](worldclim.org) to model the climate envelope and specifically 19 standard climatic variables recorded 1970-2000: 
+
+https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_10m_bio.zip
+
+Download this folder, unzip it, and move the files into your `WORLDCLIM_Rasters` folder. You should have a set of 19 .tif files. Each raster corresponds to a different climatic variable and you can learn more about each here: 
+
+https://www.worldclim.org/data/bioclim.html
+
+Let's take a look at one of these rasters: 
+
+```{r}
+#load a raster
+bio1<- raster("WORLDCLIM_Rasters/wc2.1_10m_bio_1.tif")
+plot(bio1) 
+```
+
+
+`bio1` is the mean temperature of the earth from 1970-2000. The units are degrees Celsius. Let's look at the metadata: 
+```{r}
+bio1
+```
+
+Here's what you will see:
+
+Line 1, `class`: `bio1` is a raster.
+
+Line 2, `dimensions`: Raster dimensions.
+
+Line 3, `resolution`: Size of a cell.  The size is in the units used in the coordinate system.  In this case the rasters is in the unprojected (WGS84) coordinate system, so the units are in degrees.  `r round(res(bio1)[1], 2)` degrees is about `r round(res(bio1)[1] * 100, 0)` km at the equator.
+
+Line 4, `extent`: This is the "bounding box" of the raster.
+
+Line 5, `crs`: This string represents the WGS84 coordinate reference system.  It tells R how to draw the raster and what units for cell size.
+
+Line 6, `data source`: If the raster is in memory or a file.
+
+Line 7, `names`: The name of the raster... you can change this with `names(bio01) <- 'meanTemp'`.
+
+Line 8, `values`: The min and max values of the raster
+
+___
+You can do math on a raster just like any variable in R. Let's convert to Celsius to Fahrenheit.  
+
+```{r}
+bio1_f <- bio1 * (9/5)+32
+plot(bio1_f)
+```
+ 
+
+If we want to work with multiple rasters that have the same extent and resolution we can create a stack 
+
+```{r}
+clim_stack <- stack(list.files("WORLDCLIM_Rasters", full.names = TRUE, pattern = ".tif"))
+```
+
+Let's look at the stack
+
+```{r}
+plot(clim_stack, nc = 5) # nc plots five columns of the 19 rasters
+
+clim_stack
+```
+
+For the remainder of the exercise, select a subset (3-5) of the climate variables that are particularly interesting or important to you and make your own raster stack.  
+
+```{r}
+my_clim_stack <- stack(
+  raster('WORLDCLIM_Rasters/wc2.1_10m_bio_2.tif'),
+  raster('WORLDCLIM_Rasters/wc2.1_10m_bio_4.tif'),
+  raster('WORLDCLIM_Rasters/wc2.1_10m_bio_17.tif')
+)
+#Look up the variable on https://www.worldclim.org/data/bioclim.html and rename the variable with a more descriptive name.  
+names(my_clim_stack) <- c("mean_diurnal_range", "temperature_seasonality", "precip_driest_quarter")
+
+plot(my_clim_stack)
+```
+
+Are my variables climate correlated with one another? 
+
+```{r warning=FALSE}
+pairs(my_clim_stack) #pairs is a base R function that plots univariate distribution and bivariate relationships
+```
+
+### Mapping your personal points
+
+Make a list of 10 locations you would like to model your climate envelope on. This could be places you have lived, places you have traveled, places you would like to travel, or places you want to avoid. 
+
+Now let's determine the coordinates of these places on our map. We will use these locations to train our model. To do this we will plot a map of the earth and then use the mouse to select points. 
+
+Go to [MaturalEarth](http://www.naturalearthdata.com/downloads/10m-cultural-vectors/) and under the "Admin 0 – Countries" section download countries. This will download a shapefile. Unzip this files and place it in your `Country_Shapefiles` folder within this project. 
+
+Now load the shapefile into R. 
+```{r}
+countries <- shapefile("Country_Shapefiles/ne_10m_admin_0_countries.shp")
+countries
+```
+
+This data object consists of two things: 1) vector data describing the borders of the shapes and a data frame with country names and a vairety of other data. 
+
+```{r}
+head(countries)
+```
+
+This looks just like a data frame and you can manipulate it like a data frame: 
+
+```{r eval=FALSE}
+nrow(countries) # how many rows?
+countries$wantToBeHere <- FALSE # add a column
+mexico <- subset(countries, NAME=='Mexico') # subset using subset command
+uzbek <- countries[countries$NAME=='Uzbekistan', ] # subset by row
+sovereign <- countries[ , 4] # 4th column... but still has all shapes associated with it
+countries[ , 'SOVEREIGNT']  # 4th column again... still has all shapes associated with it
+countriesDf <- as.data.frame(countries) # remove shape data but keep data frame
+```
+
+Let's plot the `countries` shapefile.  
+
+```{r}
+plot(countries, col='goldenrod', border='darkblue') 
+```
+
+If the extent and coordinate systems are the same, we can plot both raster and shapefiles. We will start by opening up a new plot device: 
+
+```{r eval=FALSE}
+dev.new()
+```
+
+Resize this plot widow to full screen. Now plot the raster and shapefile.  
+
+```{r}
+plot(my_clim_stack[[2]]) # plot mean annual temperature
+plot(countries, add=TRUE) # add countries shapefile
+```
+
+Now let's locate your points on this map. We will start by issuing the command below and then using the mouse to click on points on the map. This will populate `my_sites` with the lat. and lon. of each point. 
+
+```{r eval=FALSE}
+my_sites <- as.data.frame(click(n=10))
+```
+
+Now let's look at your points
+
+```{r eval=FALSE}
+names(my_sites) <- c('longitude', 'latitude')
+my_sites
+```
+
+```{r echo=FALSE}
+my_sites <- read.csv("My_locations/my_sites.csv", header = TRUE)
+my_sites
+```
+
+Note that longitude is first and latitude is second. Often we say “latitude and longitude”, by which we mean “y and x coordinates.” However, we usually also say “x and y” (not “y and x”). Many spatial commands in R assume longitude (x) is first and latitude is second (y), so we'll adopt that convention here as a good practice.
+
+Now we can extract values from the climate rasters at each of our points. 
+
+```{r}
+env <- as.data.frame(extract(my_clim_stack, my_sites))
+env
+```
+
+```{r}
+# join environmental data and your site data
+my_sites <- cbind(my_sites, env)
+my_sites
+```
+
+### Creating shapefiles and intersecting shapes and rasters
+
+We can turn our points into a shapefile by specifying a cooordinate system. We will get the coordinate system from our raster
+
+```{r}
+myCrs <- projection(my_clim_stack) # get projection info
+
+# make into points file
+my_sites_shape <- SpatialPointsDataFrame(coords=my_sites, data=my_sites, proj4string=CRS(myCrs))
+my_sites_shape
+```
+
+Now let's plot this shapefile along with the other elements. 
+
+```{r}
+plot(my_clim_stack[[2]])
+plot(countries, add=TRUE)
+points(my_sites_shape, pch=16) # show sites on the map
+```
+
+If you want to save these points for later we can do that with `writeORG` function from the rgdal package
+
+```{r, eval=FALSE}
+writeOGR(mySitesShape, 'My_locations', 'my_sites_shape', driver='ESRI Shapefile')
+```
+
+What if we want to create a shape file of only the countries we have visited? We can intersect our points with the country shape file. But first we will need to ensure they are in the same map projection.
+
+```{r}
+projection(my_sites_shape)
+
+projection(countries)
+```
+
+Looks good!
+
+Now we can identify the countries that contain our points
+
+```{r}
+# add a column to countries data frame with a unique number
+countries$id <- 1:nrow(countries)
+
+# see which countries points fall into
+my_countries <- over(my_sites_shape, countries)
+head(as.data.frame(my_countries)) # let's look at data frame portion
+```
+
+This is only the data from the country polygons to get the actual country polygons to plot we have to do one more step. 
+
+```{r}
+my_countries <- countries[countries$id %in% my_countries$id, ] #select my countries from the country shape file by id #
+# now let's plot just my countries
+plot(my_countries)
+points(my_sites_shape, col='red', pch=16)
+```
+
+We can then use `my_countries` to subset the climate rasters. 
+
+```{r}
+# convert shapefile to raster
+my_countries_mask <- rasterize(my_countries, my_clim_stack[[2]])
+my_countries_mask <- my_countries_mask * 0 + 1 # make all values 1
+
+my_clim_sites <- my_clim_stack[[2]] * my_countries_mask
+plot(my_clim_sites)
+```
+
+### Selecting Random Points 
+
+To train our climate model we need a large set of random points to contrast agianst our selected locations. Ideally these would be locations where we were absent. However, if this is not practicable, a random selection of points can be sufficient. 
+
+```{r}
+bg <- as.data.frame(randomPoints(my_clim_stack, n=10000)) # 10,000 random sites
+names(bg) <- c('longitude', 'latitude')
+head(bg)
+```
+Note `select random points takes into account the curvature of the earth and you will see a lower density of random points where the projection has enlarged a feature (e.g. Greenland)
+
+Lest take a look at our random or background (bg) points
+
+```{r}
+plot(my_clim_stack[[1]])
+points(bg, pch='.') # plot on map
+```
+
+Now lets extract the climate values at these points and combine them with the bg data set of locations. 
+
+```{r}
+# extract enviro variables for the random points
+bgEnv <- as.data.frame(extract(my_clim_stack, bg))
+head(bgEnv)
+bg <- cbind(bg, bgEnv)
+head(bg)
+```
+
+### The Model
+
+To start we will combine our site data with the background points and create a varaible `pres_bg` that indicates my point as a `1` and background as a `0`. 
+
+```{r}
+pres_bg <- c(rep(1, nrow(my_sites)), rep(0, nrow(bg)))
+
+train_data <- data.frame(
+    pres_bg=pres_bg,
+    rbind(my_sites, bg)
+)
+
+head(train_data)
+```
+
+Now we are ready to train the model. We will use a generalized linear model (glm) with `pres_bg` as the dependent variable and our climate variables as independent variables. Since this is a binary outcome and quadratic model provides a good starting point. 
+
+```{r}
+my_model <- glm(
+    pres_bg ~ mean_diurnal_range*temperature_seasonality*precip_driest_quarter + I(mean_diurnal_range^2) + I(temperature_seasonality^2) + I(precip_driest_quarter^2),
+    data=train_data,
+    family='binomial',
+    weights=c(rep(1, nrow(my_sites)), rep(nrow(my_sites) / nrow(bg), nrow(bg)))
+)
+
+summary(my_model)
+```
+
+We will ignore the warning and we are not going to put to much stock in the statistical significance of the variables in the model. Our glm does not account for spatial autocorrelation, so these are likely inflated. However, we can use the model to make useful predictions and characterize suitable habitat given our selected points. 
+
+```{r}
+my_world <- predict(
+  my_clim_stack,
+  my_model,
+  type='response'
+)
+
+my_world
+```
+
+What does my world look like? 
+
+```{r}
+plot(my_world)
+plot(countries, add=TRUE)
+points(my_sites_shape, col='red', pch=16)
+```
+
+The closer a point is to `1` the better match it is to the points I selected.
+
+Let's save this raster, we may need it later!
+
+```{r eval=FALSE}
+writeRaster(my_world, 'My_Climate_Niche/my_world', format='GTiff', overwrite=TRUE, progress='text')
+```
+
+We have now defined our climate preference. We can further compare this to the global environment by setting a threshold to select the top 25% most preferred regions and comparing to the globe as a whole. 
+
+```{r}
+# threshold your "preferred" climate
+my_world_thresh <- my_world >= quantile(my_world, 0.75)
+plot(my_world_thresh)
+```
+
+```{r}
+# convert all values not equal to 1 to NA...
+# using "calc" function to implement a custom function
+my_world_thresh <- calc(my_world_thresh, fun=function(x) ifelse(x==0 | is.na(x), NA, 1))
+
+# get random sites
+my_best_sites <- randomPoints(my_world_thresh, 10000)
+my_best_env <- as.data.frame(extract(my_clim_stack, my_best_sites))
+
+# plot world's climate
+smoothScatter(x=bgEnv$temperature_seasonality, y=bgEnv$precip_driest_quarter, col='lightblue')
+points(my_best_env$temperature_seasonality, my_best_env$precip_driest_quarter, col='red', pch=16, cex=0.2)
+points(my_sites$temperature_seasonality, my_sites$precip_driest_quarter, pch=16)
+legend(
+  'bottomright',
+  inset=0.01,
+  legend=c('world', 'my niche', 'my locations'),
+  pch=16,
+  col=c('lightblue', 'red', 'black'),
+  pt.cex=c(1, 0.4, 1)
+  
+)
+```
+
+Looks like my climate niche is dry and temperate regions!
+
+```
+This lesson was adapted with permission from Adam Smith: http://www.earthskysea.org/.
+```
