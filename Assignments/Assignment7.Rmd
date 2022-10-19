@@ -1,0 +1,27 @@
+---
+title: 'BIOL7263 - Assignment #7'
+author: "Matthew Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document:
+  theme: cosmo
+---
+___
+
+## GIS in `R` 
+
+In an Rmarkdown document:  
+
+1) Present a map of your climate niche with your selected locations highlighted.  
+2) Present a scatter plot of two of your selected variables for the world as a whole, your climate niche, and your selected points. 
+3) Provide a link to the R script you used to calculate you climat eniche and generate the maps and plots. 
+
+Knit this markdown document and link to the html file on your portfolio page. 
+
+
+  
+  
+    
+
+
+ 
