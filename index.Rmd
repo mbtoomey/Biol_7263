@@ -38,7 +38,7 @@ October 3  | [Intro to ggplot](Lectures/Lesson7.html), [ggplot aesthetics](Lectu
 October 10  | [Beyond Bar Graphs](Lectures/Lesson7d.html), Inkscape | [Assignment 6](Assignments/Assignment6.html)  
 October 17  | [GIS in R](Lectures/Lesson9/Lesson9.html) | [Assignement 7](Assignments/Assignment7.html)  
 October 24  | [Acuity View Lesson - Mierow](https://tanman6711.github.io/MierowBIOL7263/Assignments/AcuityViewLesson.html), [Loop the loop - Adamic](https://emadamic.github.io/AdamicBIOL7263/MyLesson/LoopLesson.html) | see lesson link
-October 31  | [AIC in R - West](https://amycwest.github.io/WestBIOL7263/Model_selection/Model_selection_markdown.html), [PCA in R - Cartmell](https://laci-cartmell.github.io/Cartmell_Lesson_PCA/) | -  
+October 31  | [AIC in R - West](https://amycwest.github.io/WestBIOL7263/Model_selection/Model_selection_markdown.html), [PCA in R - Cartmell](https://laci-cartmell.github.io/CARTMELLBIOL7263.rmd/#PCA_Lesson) | see lesson links  
 November 7  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
 November 14  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
 November 21  | Thanksgiving break | -  
