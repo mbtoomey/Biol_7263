@@ -42,7 +42,8 @@ October 31  | [AIC in R - West](https://amycwest.github.io/WestBIOL7263/Model_se
 November 7  | [Functions in R - Lewis](https://cari-d-lewis.github.io/LewisBIOL7263/Assignments/Functions_R.html), [Rentrez - Paslay](https://github.com/CalebPaz28/PaslayBIOL7263/blob/master/Project/rentrez_presentation_notes.R) | see lesson links  
 November 14  | [Phytools - Bierbaum](https://emilybierbaum.github.io/BierbaumBIOL7263/Bierbaum.html), [Geomorph - Hansen](https://bhansen21.github.io/HansenBIOL7263/Assignments/Geomorph.html) | see lesson links
 November 21  | Thanksgiving break | -  
-November 28  | [Student lessons](https://docs.google.com/spreadsheets/d/1iSrRPsjxpzHALhK4eL7URGmOxW1vBUWvOam4CoJK8ss/edit?usp=sharing) | -  
+November 28  | [Heatmaps - Herrboldt](https://madisonherrboldt.github.io/HerrboldtBIOL7263/My_Lesson_Heatmaps/MAH_Heatmap_Lesson.html), [Creating your own package - Delaporte](https://elisead3.github.io/DelaporteBIOL7263/RPackagesLesson/Creating-R-Packages-Lesson.html)
+ | see lesson links  
 December 5  | Last day of classes | -  
 
 ___
