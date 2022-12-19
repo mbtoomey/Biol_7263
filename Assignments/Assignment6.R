@@ -4,7 +4,7 @@ MBT_ebird<-read_csv("https://github.com/mbtoomey/Biol_7263/blob/main/Data/MBT_eb
 
 glimpse(MBT_ebird)
 
-#birds per month faceted by location 
+# 1. birds per month faceted by location 
 
 bird_month<-MBT_ebird %>%
   group_by(month, year, location) %>%
@@ -18,7 +18,32 @@ p<-ggplot(bird_month, aes(month, total_sp)) +
             facet_wrap(~location)
 p
 
-#using the full dataset from exercise #5 plot a comparison of mass by treatment including the individual observations, the mean, and standard error of the mean. Use point color or shape to indicate the sex. 
+# 2. using the full dataset from exercise #5 plot a comparison of mass by treatment including the individual observations, the mean, and standard error of the mean. Use point color or shape to indicate the sex. 
+
+###Prep data from assignment 5 ######################################
+
+part1<-read_csv("https://github.com/mbtoomey/Biol_7263/raw/main/Data/assignment6part1.csv")
+
+part2<-read_csv("https://github.com/mbtoomey/Biol_7263/raw/main/Data/assignment6part2.csv")
+
+part1_piv<-part1 %>%
+  pivot_longer(cols = !ID, names_to = c("sample","sex","treatment"), names_sep = "_")
+
+part1_pw<-part1_piv %>%
+  pivot_wider(names_from = ID, values_from = value)
+
+part2_piv<- part2 %>%
+  pivot_longer(cols = !ID, names_to = c("sample_treatment"))
+
+part2_pw <- part2_piv %>%
+  separate(sample_treatment, into = c("sample","treatment"))
+
+part2_pw <- part2_pw %>%
+  pivot_wider(names_from = ID, values_from = value)
+
+full_set <- full_join(part1_pw, part2_pw, by = c("sample","treatment"))
+
+###############################################################
 
 p1<-ggplot(full_set, aes(treatment, mass)) +
   geom_jitter(aes(color = sex),width = 0.3, 
@@ -30,7 +55,7 @@ p1<-ggplot(full_set, aes(treatment, mass)) +
                color = "red")
 p1
 
-#using the full dataset from exercise #5 plot a comparison of mass vs. age, indicate sex with point shape or color, and fit separate regression lines (without CI) to each treatment.  
+# 3. using the full dataset from exercise #5 plot a comparison of mass vs. age, indicate sex with point shape or color, and fit separate regression lines (without CI) to each treatment.  
 
 p2<-ggplot(full_set, aes(age, mass)) +
   geom_point(aes(color = treatment),width = 0.3, 
@@ -39,52 +64,11 @@ p2<-ggplot(full_set, aes(age, mass)) +
   scale_color_manual(values = c("orange","green"))
 p2
 
-#combine the plots from XXXX into a single plot with a title and labeled panels 
+#4. combine the plots from 2 and 3 into a single plot with a title and labeled panels 
 
 require(patchwork)
 
-p1 / p2
+p1 / p2 + plot_annotation("Predictors of Mass", tag_levels = 'A')
 
-#Q1
 
-Best_year<-MBT_ebird %>% 
-  group_by(year) %>% 
-  summarise(tot_birds = sum(count)) %>% 
-  filter(tot_birds == max(tot_birds))
-
-#Q2
-
-species_count<-MBT_ebird %>%
-  filter(year == 2014) %>%
-  summarise(total_sp = n_distinct(common_name))
-
-#Q3
-
-RWBB<-MBT_ebird %>%
-  filter(common_name == "Red-winged Blackbird") %>%
-  group_by(location) %>% 
-  summarise(obs = n()) %>%
-  filter(obs == max(obs))
-
-#Q4
-
-encounter_rate<-MBT_ebird %>%
-  filter(duration < 200 & duration > 5) %>% 
-  group_by(list_ID) %>%
-  summarise(total_sp = n_distinct(common_name), duration = first(duration), year = first(year)) %>%
-  mutate(encounter_rate = total_sp/duration) %>%
-  group_by(year) %>%
-  summarise(mean_encounter_rate = mean(encounter_rate), total_checklists = n())
-
-#Q5
-
-Top_10_species<-MBT_ebird %>%
-  group_by(common_name) %>%
-  summarise(num_lists = n())%>%
-  arrange(desc(num_lists)) %>%
-  top_n(10)
-  
-
-Top_10_only<-MBT_ebird %>%
-  filter(common_name %in% Top_10_species$common_name)
 

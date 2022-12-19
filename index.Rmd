@@ -31,12 +31,12 @@ Date (week of)  | Lecture | Assignments
 August 22  | [Class organization and scheduling](https://forms.gle/CUaDDMa7enTy3YL59) | -  
 August 29  | RStudio, [Git](Lectures/Lesson2.html) | [Assignment 1](Assignments/Assignment1.html)  
 September 5  | [Rmarkdown](Lectures/Lesson3.html) | [Assignment 2](Assignments/Assignment2.html)  
-September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html)| [Assignment 3](Assignments/Assignment3.html) 
+September 12  | [Intro to Regular Expressions](Lectures/Lesson4.html)| [Assignment 3](Assignments/Assignment3.html), [MBT solution 3](Assignments/Exercise3_solutions.html)
 September 19  |  [Intro to R](Lectures/Lesson2a.html), [Data import/export with readr](Lectures/Lesson5b.html), [dplyr and wrangling](Lectures/Lesson5.html)| --
-September 26  | [Tidy](Lectures/Lesson6.html), [Merge and Compare](Lectures/Lesson6b.html) | [Assignment 4](Assignments/Assignment4.html), [Assignment 5](Assignments/Assignment5.html)
+September 26  | [Tidy](Lectures/Lesson6.html), [Merge and Compare](Lectures/Lesson6b.html) | [Assignment 4](Assignments/Assignment4.html), [MBT solution 4](Assignments/Assignment4.R), [Assignment 5](Assignments/Assignment5.html), [MBT solution 5](Assignments/assignment5.R),
 October 3  | [Intro to ggplot](Lectures/Lesson7.html), [ggplot aesthetics](Lectures/Lesson7b.html), [facet and patchwork](Lectures/Lesson7c.html) | -- 
-October 10  | [Beyond Bar Graphs](Lectures/Lesson7d.html), Inkscape | [Assignment 6](Assignments/Assignment6.html)  
-October 17  | [GIS in R](Lectures/Lesson9/Lesson9.html) | [Assignement 7](Assignments/Assignment7.html)  
+October 10  | [Beyond Bar Graphs](Lectures/Lesson7d.html), Inkscape | [Assignment 6](Assignments/Assignment6.html), [MBT solution 6](Assignments/Assignment6.R)  
+October 17  | [GIS in R](Lectures/Lesson9/Lesson9.html) | [Assignment 7](Assignments/Assignment7.html)  
 October 24  | [Acuity View Lesson - Mierow](https://tanman6711.github.io/MierowBIOL7263/Assignments/AcuityViewLesson.html), [Loop the loop - Adamic](https://emadamic.github.io/AdamicBIOL7263/MyLesson/LoopLesson.html) | see lesson link
 October 31  | [AIC in R - West](https://amycwest.github.io/WestBIOL7263/Model_selection/Model_selection_markdown.html), [PCA in R - Cartmell](https://laci-cartmell.github.io/CARTMELLBIOL7263.rmd/#PCA_Lesson) | see lesson links  
 November 7  | [Functions in R - Lewis](https://cari-d-lewis.github.io/LewisBIOL7263/Assignments/Functions_R.html), [Rentrez - Paslay](https://github.com/CalebPaz28/PaslayBIOL7263/blob/master/Project/rentrez_presentation_notes.R) | see lesson links  

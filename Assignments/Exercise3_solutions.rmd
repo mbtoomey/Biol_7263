@@ -1,0 +1,62 @@
+---
+title: "Exercise 3 solutions"
+author: "M. Toomey"
+date: "`r Sys.Date()`"
+output: 
+html_document: 
+    highlight: tango
+---
+
+1. two steps
+```
+Find:
+,
+
+Replace:
+(nothing)
+```
+
+```
+Find:
+\s{3,}
+
+Replace:
+, 
+```
+
+2.
+
+```
+Find:
+(\w+),\s(\w+).*\s(\w+@\w+.\w+)
+
+Replace:
+\2 \1 \(\3\)
+```
+
+3. 
+
+```
+Find:
+,\s.*,
+
+Replace:
+,
+```
+
+4.
+```
+Find:
+,\s(\w)\w+\s(\w+)
+
+Repalce:
+, \1_\2
+```
+5.
+```
+Find:
+,\s(\w)\w+\s(\w{3})\w+
+
+Replace: 
+, \1_\2.
+```

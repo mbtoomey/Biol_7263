@@ -24,3 +24,14 @@ part2_pw <- part2_pw %>%
 full_set <- full_join(part1_pw, part2_pw, by = c("sample","treatment"))
 
 glimpse(full_set)
+
+#Q2
+
+resid_mass_table <- full_set %>%
+  mutate(resid_mass = mass/body_length) %>%
+  na.omit() %>%
+  group_by(sex, treatment) %>%
+  summarise(mean_resid_mass = mean(resid_mass), SD_resid_mass = sd(resid_mass))
+  
+           
+
